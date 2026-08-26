@@ -235,6 +235,23 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       `object-position` / height / `href` actually reflect the intent — a
       successful build is not proof (guardrail 12).
 
+   d. **Components you BUILD yourself — test every option/variant they expose,
+      on the real surface.** A component with a variant field (`media_type`
+      image/video/youtube, `layout`, `card_style`, columns…) is only as done
+      as the combination you actually tried; wiring and verifying one path is
+      not the component. Enumerate the field's values and click each on the
+      DEPLOYED page — especially the headline use. Real miss (Boulanger,
+      2026-08-26): a `page-hero` media picker was tested only as YouTube on an
+      *inline* featured block, so the **full-bg + video/youtube** path was
+      never wired and the hero's own primary use silently rendered nothing
+      until the operator hit it. Build a quick matrix (layout × media_type,
+      light/dark bg, empty vs filled) and run it before declaring done. And
+      **before inventing a pattern the operator judges on feel** (a media/
+      header picker, a hero), check prior demo repos first — the operator
+      pointed at Yugo's media header as the reference; a proven pattern they
+      already liked beats a fresh invention (`~/dev/accounts/*/` and the Yugo
+      repo).
+
    Commit and push the fixes.
 
 5. **`npm install`, then check `git diff` before committing.** Benign lockfile
