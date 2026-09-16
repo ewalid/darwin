@@ -20,12 +20,15 @@ anything new.
    gating, quotas, SLA, published capabilities.
 3. **`validated`** — survived the operator's review and went out the door.
    Excellent for *framing* and commercial judgement, and it carries real
-   nuance the docs don't. But **not infallible on facts**: of the four
+   nuance the docs don't. But **not infallible on facts**: of the five
    validated submissions harvested so far, three contained a wrong or
    misattributed certification claim and one mis-stated a licensing detail.
-   Trust the framing; verify the figures — and see standing lesson 9 below,
-   the certification error specifically has now recurred twice with the
-   same root cause.
+   Trust the framing; verify the figures — and see standing lesson 9 below.
+   ✅ The 2026-09-15 architecture RFI is the first to get the AWS-certificate
+   attribution **right**, and it also resolved the 14-vs-30-day backup
+   contradiction outright — so the newest submission is currently the most
+   factually reliable one in here. It still gave two different SOC 2 Type II
+   dates in two sections, so "verify the figures" stands.
 
 ## Categories
 | File | Covers |
@@ -41,6 +44,11 @@ anything new.
 | `dam-assets.md` | Asset Manager, Image Service, asset governance/distribution, DAM partials |
 | `company-credentials.md` | Company facts, funding, partnerships, case studies, references |
 | `pricing-licensing.md` | Licensing structure, plan gating, TCO framing |
+| `api-limits-webhooks.md` | Rate limits, quotas, `cv` caching, CDN layering, webhook guarantees/security, API versioning & deprecation |
+| `multi-space-governance.md` | Space/folder topology, schema-as-code, propagation, compatibility gates, blast radius, rollback, component lifecycle, environments |
+| `ai-governance.md` | AI capability register, providers, training/retention/residency, BYOAI, MCP server, opt-out, IP position |
+| `observability-telemetry.md` | Logs, metrics, audit events, alerting, SIEM export, the named telemetry gaps |
+| `exit-portability.md` | Export formats, S3 Backups exclusions, exit runbook, SDK lock-in inventory |
 
 ## Standing lessons (learned the expensive way — read before drafting)
 1. **Plan tier gates features — read `pricing-licensing.md` FIRST, before
@@ -111,3 +119,90 @@ anything new.
     requirements grid. Confirms standing lesson from `rfp-answer`'s own
     guidance: read the incoming document's own structure and vocabulary
     before drafting, rather than defaulting to a grid format.
+
+12. **Answer in the format the question mandates.** An architecture-grade
+    RFI often states a required artefact per question — *"Format:
+    component-level responsibility matrix covering configuration,
+    monitoring, incidents, capacity, security, recovery and cost"*,
+    *"Format: failure-mode matrix showing retained functionality, cache
+    behaviour, recovery steps and maximum content staleness"*. That line is
+    a compliance requirement, not a suggestion: produce a matrix when a
+    matrix is asked for, with **exactly the named columns**, and a sequence
+    diagram, risk matrix or worked example when those are asked for.
+    Answering a mandated matrix in prose loses points no amount of substance
+    recovers. This is standing lesson from `rfp-answer` step 1 ("match the
+    document's own vocabulary") extended from *wording* to *artefact shape*.
+
+13. **When they send an architecture diagram, answer against their drawing,
+    layer by layer, naming their components.** The validated response walked
+    the prospect's own CDN / WAF / load balancer / compute / cache stack and
+    said what the CMS does and does not touch at each layer. Describing our
+    architecture instead makes the evaluator do the mapping — and they score
+    what they can see.
+
+14. **Split responsibility explicitly: us / them / their partner / their
+    cloud.** A component-level RACI across configuration, monitoring,
+    incidents, capacity, security, recovery and cost is the most reusable
+    single artefact in the library. And **name the genuinely *shared* rows**
+    (we sign the webhook, they verify it; we issue the preview token, they
+    validate it server-side) — shared rows are what make the matrix read as
+    honest rather than defensive.
+
+15. **Name the gap, then the mitigation, in the same breath — never one
+    without the other.** "No automatic webhook retry" alone is a scoring
+    loss; "no automatic retry, so treat the payload as a notification, fetch
+    current state on receipt, acknowledge in under a second and run a
+    scheduled reconciliation job that bounds staleness to the poll interval"
+    is an architecture answer. The same pattern applies to: no replay
+    protection, no SIEM connector, no tested exit runbook, no scheduled
+    unpublish, no deprecation flag. This is standing lesson 3 ("a gap is
+    usually a path") at architecture scale — and lesson 5's "well-written
+    partial" is the same instinct at requirement scale.
+
+16. **"Not in scope of a CMS" is a legitimate classification.** Semantic
+    markup, captions/transcripts and link-purpose quality were each answered
+    that way in a validated accessibility matrix — paired with what the
+    platform *does* contribute and who owns the rest. Three of six rows, and
+    it strengthened the response rather than weakening it. Extends standing
+    lesson 6.
+
+17. **Correct an outdated premise rather than answering it.** One question
+    referenced a "15-space target model"; the commercial scope had since
+    moved to a 10-space rate-card structure, and the answer opened with a
+    "Note on scope" saying so before answering. Evaluators reuse old drafts —
+    answering a stale premise as written propagates the error into the
+    contract.
+
+18. **Label what is an assumption, out loud.** The validated response
+    repeatedly wrote "working assumption, not a formally scoped number",
+    "discussed on calls, not signed off", "illustrative sizing only, not
+    contractual". This costs nothing, prevents a discussion note hardening
+    into a commitment, and reads as rigour. Do it for every number that came
+    from a call rather than a document.
+
+19. **Consultative asides are worth more than the answer they sit next to —
+    and they must be *specific*.** What landed in this submission: flagging
+    that AI alt-text sends the *image itself* outside the managed-provider
+    boundary given the prospect's sensitivity about its imagery; that their
+    own timeline put migration too late and dry runs should start during
+    the build; that a load test needs 15 working days' notice and should be
+    arranged ahead of their known seasonal peak; that URL changes threaten
+    organic rankings right before that same peak. Each is one sentence,
+    unasked, and directly actionable. Look for the equivalent in every deal:
+    where does *this* prospect's stated context collide with a real property
+    of the platform or the plan?
+
+20. **Worked examples beat descriptions.** This response used a worked
+    failure example (timestamped, step by step, ending in a design
+    implication), a worked deployment example (a paired schema + component
+    change promoted region by region), and a worked cost example (editors ×
+    hours × days × saves/hour × calls, with low/expected/high columns and an
+    explicit "illustrative, not contractual" label). Each converts an
+    assertion into something an evaluator can check.
+
+21. **The GTC and Order Form are a source, and a distinct one.** Breaking-
+    change notice periods, objection windows, termination remedies, service
+    credits and overage all live there — not in the docs and not in the
+    fact sheet. Cite the contractual floor as the commitment and any
+    generous precedent as *observed practice on one change*, explicitly not a
+    committed term. See `api-limits-webhooks.md` and `company-credentials.md`.

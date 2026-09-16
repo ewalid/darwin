@@ -28,3 +28,6 @@ resources/rfp-library/validated-submissions/
 # Company-specific reference: Notion Case Study DB URLs + the internal win
 # case study process doc. Same class as people.md — local-only. (2026-08-04)
 resources/case-study-database.md
+
+# Local Claude Code permission overrides — per-machine, not shared.
+.claude/settings.local.json

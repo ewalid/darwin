@@ -304,23 +304,34 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    on the first run). Avoid screenshots unless a text check is ambiguous; a
    first "blank" check is usually a paint-timing race — re-check text.
 
-9. **Wire both preview URLs into the CMS** via Management API (the MCP has no
-   space-settings write op). Re-fetch environments first so you don't clobber
-   anything, then PUT the full list:
+9. **Wire the space `domain` AND both preview environments** via Management
+   API (the MCP has no space-settings write op). Solutions Demo spaces ship
+   with `domain` = `https://<hash>.me.storyblok.com/` — that host is a
+   Shopify theme stub and the Visual Editor iframe shows
+   **`page.liquid is missing`**. Setting `environments` alone is NOT enough:
+   VE still defaults to `domain` (hit on two demo builds,
+   2026-09-08 and 2026-09-15). Always PUT both in one call, Vercel first:
    `PUT /v1/spaces/<id>` with
-   `{"space":{"environments":[
-     {"name":"dev","location":"https://localhost:3000/"},
-     {"name":"Vercel","location":"https://<customer>-storyblok-demo.vercel.app/"}]}}`.
+   `{"space":{"domain":"https://<customer>-storyblok-demo.vercel.app/",
+     "environments":[
+     {"name":"Vercel","location":"https://<customer>-storyblok-demo.vercel.app/"},
+     {"name":"dev","location":"https://localhost:3000/"}]}}`.
    Plain URLs, nothing appended — a `?token=...&path=...` query-param token
    *overrides* the env-var fallback, so pasting the wrong one there (e.g. a
-   Shopify token by mistake) silently breaks auth (happened 2026-07-24). Set
-   the Vercel entry as the default. localhost is wired as "dev" for
-   convenience but is NOT launched or verified by this skill.
+   Shopify token by mistake) silently breaks auth (happened 2026-07-24).
+   localhost is wired as "dev" for convenience but is NOT launched or
+   verified by this skill. After the PUT: hard-refresh VE and confirm the
+   location dropdown shows Vercel, not `me.storyblok.com`.
 
 ## Working with the Storyblok Management API / MCP
 
 Mechanics learned the hard way — none of these are obvious from the tool
 descriptions.
+
+- **`page.liquid is missing` = wrong space `domain`, not a Liquid bug.**
+  SE demo spaces default `domain` to `*.me.storyblok.com` (Shopify stub).
+  Custom frontends must overwrite `domain` to the Vercel URL in the same
+  PUT as `environments` (step 9). Environments alone leave VE on the stub.
 
 - **Placeholder images must be uploaded as real CMS assets.** Frontends that
   run images through an image-service helper append a transform suffix

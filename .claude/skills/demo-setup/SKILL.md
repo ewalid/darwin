@@ -53,12 +53,18 @@ CMS-specific nouns for that product's equivalents.
 
 4. **Front-end wiring — and which skill actually builds it.** Flag
    explicitly whether the stations need:
-   - **Content-only:** the existing starter frontend already renders
-     every block; execution is `storyblok-content` (rebrand, folders,
-     pages from existing components).
-   - **Custom frontend:** a layout or block the starter cannot draw;
-     execution is `custom-storyblok-demo` (clone/scaffold + deploy),
-     then code work in that demo repo.
+   - **Content-only:** the shared Solutions Demo Environment frontend
+     already renders every block; execution is `storyblok-content`
+     (rebrand, folders, pages from existing components). No repo clone.
+   - **Custom frontend (looks-like-the-prospect):** clone a private
+     copy of the SE showcase template
+     (`https://github.com/storyblok/storyblok-demo-showcase-se`), own
+     it as `<customer>-storyblok-demo`, deploy, then author
+     prospect-shaped pages on top. Execution is `custom-storyblok-demo`
+     Path A (that skill does the clone/own/deploy; this skill only
+     decides and scripts *what* the stations need). Default Path A
+     starter lives in local `memory.md` — confirm it there if the
+     operator's default has moved.
    Don't bury this in a wiring note. The operator's "custom demo" often
    means only the first case. Plus: what must be connected (e.g. a
    decoupled front-end via the Content Delivery API) for an

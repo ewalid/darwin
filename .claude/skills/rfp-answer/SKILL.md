@@ -41,6 +41,19 @@ higher-trust local source layered on top of the shared one.
      positioning harvested from those submissions, scrubbed of client
      specifics. Includes plan-gating tables and a "standing lessons"
      list in `_index.md` that exists because of real misses; read it.
+     As of 2026-09-15 there are 16 category files; five of them
+     (`api-limits-webhooks`, `multi-space-governance`, `ai-governance`,
+     `observability-telemetry`, `exit-portability`) came out of a single
+     architecture-grade RFI and are the ones to reach for on any technical
+     or enterprise-architecture evaluation.
+1b. **The contract itself — the GTC, the SLA exhibit and the deal's Order
+   Form.** A distinct source, not a subset of the docs. Breaking-change
+   definitions and notice periods, customer objection windows, termination
+   remedies, service-credit bands, overage pricing, and which entitlements
+   are actually bought for *this* account all live here and nowhere else.
+   Never improvise a contractual number from a marketing page; never quote a
+   generous precedent as if it were a committed term (see the
+   30-day-vs-6-months example in `answers/api-limits-webhooks.md`).
 2. **The product's official public docs** (the operator's product and its
    docs URL are recorded in `memory.md`) — the
    authoritative source for product/feature facts. Ranks above the
@@ -155,6 +168,18 @@ this — that's a real threshold, not a permanent ruling.
    *Yes / Partial / No* comply column plus a comments field. Read the
    column headers and legend before answering, and if the grid has a
    separate English column alongside another language, fill both.
+1b. **Obey the format the question mandates.** Architecture-grade RFIs
+   often state a required artefact per question — *"Format: component-level
+   responsibility matrix covering configuration, monitoring, incidents,
+   capacity, security, recovery and cost"*, *"Format: failure-mode matrix
+   showing retained functionality, cache behaviour, recovery steps and
+   maximum content staleness"*, *"Format: SLA/SLO table, service-credit
+   terms, exclusions and dependencies"*. That is a compliance requirement,
+   not a suggestion. Produce the named artefact with **exactly the named
+   columns**, and produce a sequence diagram, risk matrix or worked example
+   when those are what's asked for. Answering a mandated matrix in prose
+   loses points that no amount of substance recovers. This is step 1's
+   "match their vocabulary" extended from *wording* to *artefact shape*.
 2. For each requirement, check in trust order: the operator's local
    library (validated submissions first, then category answers) → the
    product's official docs → the shared (unofficial) Notion library →
@@ -222,6 +247,75 @@ this — that's a real threshold, not a permanent ruling.
    if it doesn't actually fit.
 9. Return a draft with every answer tagged by trust level so the operator
    knows what's safe to submit as-is versus what needs a second look.
+
+## Architecture-grade RFIs — the additional moves (2026-09, validated)
+
+Some RFIs are written by an enterprise architect, not a procurement team:
+they send their own target-architecture diagram, ask for responsibility
+boundaries, failure modes, blast radius, telemetry, AI governance and an
+exit runbook, and mandate an artefact format per question. That document
+type has its own playbook, learned from a validated submission that landed
+well.
+
+- **Answer against their drawing, layer by layer, naming their components.**
+  Open with a direct verdict — *"[Product] fits the proposed architecture as
+  designed"* — then one bullet per layer of *their* stack (frontend
+  autonomy, content APIs, SDKs, delivery services, cache invalidation,
+  visual editor, third-party integration, identity, managed operations,
+  deployment model, API connectivity), closing with **licensing scope** and
+  **commercial scope**. Describing our architecture instead makes the
+  evaluator do the mapping, and they score what they can see.
+- **Produce a component-level responsibility matrix** (us / them / their
+  implementation partner / their cloud provider) across configuration,
+  monitoring, incidents, capacity, security, recovery and cost. **Name the
+  genuinely shared rows** — we sign the webhook, they verify it; we issue
+  the preview token, they validate it server-side; they own their IdP
+  tenants, we own the single org SSO connection. Shared rows are what make
+  the matrix read as honest rather than defensive. Split webhook *emission*
+  from webhook *receipt/retry/reconciliation*; collapsing them is where
+  responsibility answers go wrong.
+- **Never state a gap without its mitigation in the same breath.** "No
+  automatic webhook retry" alone is a scoring loss. "No automatic retry, so
+  treat the payload as a notification, fetch current state on receipt,
+  acknowledge in under a second, and run a scheduled reconciliation job that
+  bounds staleness to the poll interval" is an architecture answer. Same for
+  no replay protection, no SIEM connector, no tested exit runbook, no
+  scheduled unpublish, no deprecation flag. This is step 4 at architecture
+  scale.
+- **"Not in scope of a CMS" is a legitimate classification** when paired
+  with what the platform *does* contribute and who owns the rest. Three of
+  six rows in a validated accessibility matrix used it, and it strengthened
+  the response.
+- **Separate "licensing choice" from "technical limitation" explicitly.**
+  Listing SSO, GraphQL, custom roles, unlimited locales and the higher SLA
+  tier as *licensing choices already reflected in what's quoted* turns five
+  potential gap-scores into a commercial non-issue in one sentence.
+- **Correct an outdated premise rather than answering it.** One question
+  referenced a scope figure the commercial conversation had already moved
+  past; the answer opened with a "Note on scope" before answering.
+  Evaluators reuse old drafts — answering a stale premise propagates the
+  error into the contract.
+- **Label every assumption out loud**: "working assumption, not a formally
+  scoped number", "discussed on calls, not signed off", "illustrative
+  sizing only, not contractual". Costs nothing, stops a discussion note
+  hardening into a commitment, and reads as rigour.
+- **Use worked examples**: a worked failure example (timestamped, step by
+  step, ending in a design implication), a worked deployment example (a
+  paired schema + frontend change promoted region by region), a worked cost
+  example (with low/expected/high columns and an explicit "illustrative"
+  label). Each converts an assertion into something the evaluator can check.
+- **Cross-reference aggressively** ("full architecture in A16", "see A05",
+  "same division of responsibility as elsewhere in this response"). Confirms
+  standing lesson 7 holds for prose responses, not just grids — and the
+  *consistency* of a repeated framing across 30 answers is itself scored.
+- **Find the consultative aside, and make it specific.** Where does this
+  prospect's stated context collide with a real property of the platform or
+  the plan? Examples that landed: an AI feature that sends the image itself
+  outside the managed-provider boundary, given their sensitivity about
+  imagery; their own timeline putting migration too late, so dry runs should
+  start during the build; a load test needing 15 working days' notice ahead
+  of their known seasonal peak; URL changes threatening organic rankings
+  right before that peak. One sentence each, unasked, directly actionable.
 
 ## Why that response was better (2026-07, worth re-reading before each RFP)
 

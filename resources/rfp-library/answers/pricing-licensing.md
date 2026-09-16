@@ -231,3 +231,45 @@ model plus recurring years 2–3.
 6. When procurement asks for financial-stability or insurance detail,
    "we'll cover this during negotiation as the information is confidential"
    is an acceptable, validated answer — not a gap.
+
+---
+
+## Added from the 2026-09-15 architecture RFI (`validated`)
+
+Enterprise-package entitlements confirmed in this submission — useful as a
+picture of what a real enterprise deal bundles, but **always confirm
+against the actual Order Form for the deal in front of you** rather than
+treating this as a standard tier:
+
+- **Included:** SAML SSO, SCIM, unlimited custom roles, unlimited custom
+  workflows and stages, unlimited locales, unlimited Releases, unlimited
+  activity-log retention, GraphQL API, Multi-Space Content Distribution,
+  Dimensions, Translatable Slugs, Export/Import Translatable Fields, AI
+  Translate, AI SEO app, native SEO app, Broken Links Checker, S3 Backups
+  app (daily), Pipelines with unlimited stages, hosted MCP server, a custom
+  AI credit allocation, 100 concurrent scheduled stories, 5 GB max asset
+  upload, and the 99.99% SLA tier.
+- ⚠️ **Environments: one included per *organisation*, not per space.**
+  Additional Environments are **priced separately.** This is a common and
+  expensive misreading — an estate planning "an Environment per space" is
+  budgeting wrong.
+- ⚠️ **BYOAI (bring-your-own AI provider) is a separately priced, annually
+  billed add-on** — *not* bundled with the base licence. Confirm as a firm
+  entitlement on the order form.
+- ⚠️ **FlowMotion (workflow automation) is a separately licensed add-on.**
+- **Space count scales via a rate card**, not a fixed ramp — there is **no
+  per-space governance fee and no charge for propagation between spaces.**
+  What scales is the per-space rate. Spaces beyond the contracted count need
+  an Order Form amendment.
+- **Locales, countries and markets are not priced units.**
+- **Rollout to an additional brand/region within the contracted space
+  allocation and unlimited-user envelope costs $0 incrementally.** Strong
+  answer to "what does it cost us to add brand N+1".
+- **Overage:** refer to the Order Form. Don't improvise a number.
+
+### Framing that worked
+Separate **"this is a licensing choice"** from **"this is a technical
+limitation"** explicitly when answering an architecture question. Listing
+SSO, GraphQL, custom roles, unlimited locales and the higher SLA tier as
+*licensing choices already reflected in what's quoted* turns five potential
+gap-scores into a commercial non-issue in one sentence.

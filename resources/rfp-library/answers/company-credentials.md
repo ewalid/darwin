@@ -149,3 +149,51 @@ that needs a named, willing customer plus account-team permission. The
 validated approach: give the two closest-profile references with a real
 "why this maps to you" paragraph each, and link the public case-study
 index for breadth.
+
+---
+
+## Added from the 2026-09-15 architecture RFI (`validated`)
+
+### Support & SLA credentials (enterprise package)
+- **Uptime:** 99.99% annual average — ⚠️ **scoped in the GTC specifically to
+  the Content Delivery API**, not to the CDN, Management API, Visual Editor
+  or preview. See `security-compliance.md` before quoting it as an
+  end-to-end figure.
+- **Support response targets:** Critical **2h** · High **12h** · Medium
+  **24h** · Low **next business day**.
+- **Channels:** Help Center, Live Chat, and a dedicated **Incident Email for
+  critical issues**. Status page with email/Slack/Teams subscription.
+- **Service credits:** pro-rated refund credit against the next billing
+  cycle, banded by plan; **exact percentages live in the Order Form / SLA
+  exhibit** — point procurement there.
+- **Named CSM** on enterprise packages, used as the direct channel for
+  breaking-change and account outreach.
+- **Expert Services** covers onboarding, partner enablement and migration
+  scoping; **Learning Academy** self-serve access for the implementing
+  partner. Implementation-specific training is normally the partner's.
+- **Penetration test summary report available under NDA** — offer it rather
+  than waiting to be asked.
+
+### Contractual commitments worth citing by name (GTC)
+- **Breaking-change definition, 30-day minimum notice, 3-month
+  previous-major availability, 20-day customer objection window, and
+  termination with pro-rated refund as the remedy.** Full wording in
+  `api-limits-webhooks.md`. Procurement reviewers score the *existence* of a
+  defined breaking-change clause, so quote it rather than describing our
+  good behaviour.
+
+### Case studies for architecture-led / multi-brand deals
+- **Accell Group** — unifying **20 brands** onto the platform, with **4 sites
+  built and live within 7.5 months**, citing the ability to copy an existing
+  brand's space and content as why later brands move faster than the first.
+  The right proof point for any "how fast can we roll out brand N+1"
+  question, because it answers the *acceleration curve*, not just the first
+  launch.
+- **Virgin Media O2** — published case study reporting a **three-minute
+  content rollback in production**. Use it wherever rollback or
+  recoverability is being scored; a real customer number beats a feature
+  description.
+
+Match case studies to the prospect's *profile* — brand count, region count,
+current CMS, team shape — not to how impressive the logo is (standing
+lesson 2's sibling).

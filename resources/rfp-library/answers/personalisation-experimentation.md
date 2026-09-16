@@ -54,3 +54,42 @@ between systems.
 ## Roadmap adjacency
 Vector-based semantic content intelligence (Strata) is roadmap, not GA —
 mention as direction of travel only, clearly labelled.
+
+---
+
+## Added from the 2026-09-15 architecture RFI (`validated`) — experimentation in a cached architecture
+
+The question that separates a real answer from a feature list: **how does
+experimentation coexist with a fully cached SSG/ISR front end?** Variant
+allocation has to run per request, so a route carrying a live experiment
+**cannot be served from a single pre-rendered, identical-for-everyone cache
+entry**. Two patterns, both compatible:
+
+- **(a) Render the experiment route dynamically** on every request.
+  Simplest; costs one extra API round-trip on a cache-cold experiment-config
+  fetch.
+- **(b) Bucket earlier and vary the CDN-cached HTML on the `visitor_id`
+  cookie**, serving a distinct cached HTML variant per bucket. This is the
+  pattern **our own marketing site uses today** — cite that, it is concrete
+  proof rather than theory.
+
+Frame it explicitly as **an implementation decision for their team, not a
+constraint we impose.** That sentence is what stops a cache-conscious
+architect scoring experimentation as a performance risk.
+
+### Consent — a clean "not ours, and here's why that's right"
+⚠️ **There is no built-in consent gate** for the `visitor_id` cookie or the
+exposure/conversion calls. Both the classification (functional vs.
+analytics) and the consent timing are implemented in the customer's own
+frontend against their own CMP. We are **not in that decision path** — which
+is the correct architecture, since consent policy is theirs to set, not
+ours to assume.
+
+### Result data ownership — a strong anti-lock-in answer
+Experiment and variant **content** lives as standard stories (exportable —
+see `exit-portability.md`). Experiment **results** (statistical
+significance, conversion data) live and are computed **entirely in the
+customer's own analytics platform**; our Results tab only *displays* what it
+reads back via the Management API. **No lock-in, no ownership of the
+underlying measurement data.** Lead with this whenever a procurement or
+data-governance reviewer touches experimentation.

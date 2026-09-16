@@ -114,3 +114,44 @@ rehosted as its own service/container/serverless function, a real
 architectural change for the prospect. Embedding it into the new frontend
 once rehosted is standard. This came up verbatim in a validated grid; don't
 soften it.
+
+---
+
+## Added from the 2026-09-15 architecture RFI (`validated`)
+
+### FlowMotion — what it actually is
+Workflow automation add-on **built on top of the open-source n8n engine**,
+with custom first-party nodes and integrations for permission management
+within an organization. **Separately licensed.** Workflows are **exportable**.
+
+The portability answer to give: it is proprietary in the sense that it wraps
+n8n with our nodes, but **the customer owns its configuration and outputs,
+workflows export, and dropping it changes nothing structural — no
+lock-in.** Same for Multi-Space Content Distribution, whose output is
+ordinary stories.
+
+**Where FlowMotion genuinely earns its place** — these are exactly the
+lifecycle gaps named in `editorial-experience.md`, so pitch it against them
+rather than generically: scheduled unpublish/expiry, content-review
+reminders, automated brand-guideline or SEO-readiness checks on content, and
+scheduled audit-log export.
+
+Neither FlowMotion nor Multi-Space Content Distribution is **required** for
+a standard architecture. Saying "not required" about your own add-on is what
+makes the rest of the portability answer believable.
+
+### Two complementary integration patterns — the reusable framing
+1. **The frontend calls external APIs directly, alongside the CMS** at render
+   time.
+2. **External data is surfaced inside the editing interface** via field
+   plugins, tool plugins or space plugins, so editors can select external
+   records and reference them from editorial content.
+
+Naming both matters: (1) alone sounds like "the CMS does nothing here";
+(2) is what makes editors' experience of external data actually good.
+
+### Custom editor extensions — ownership
+Field/tool plugins and space apps are a **standard frontend codebase in the
+customer's or partner's own repo**; we host only the manifest and runtime,
+registered via the Partner Portal / App Store manifest. Useful in any
+"who owns the extension code" or exit question.
