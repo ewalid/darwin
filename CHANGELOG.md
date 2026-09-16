@@ -6,6 +6,26 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-09-16 Installed a centrally-maintained, versioned presales skill (v1.0.0) distributed
+  as a `.skill` bundle: drafts SE Notes on CRM opportunities from recorded calls, with a
+  contribution gate and a per-opportunity approval card before any write. Genericized two
+  real-colleague example names from the vendor copy to satisfy guardrail 6 — re-apply on any
+  future version bump.
+- improve: custom-storyblok-demo — Visual Editor `page.liquid is missing` is the SE-demo space `domain` still on `*.me.storyblok.com` (Shopify stub); step 9 now PUTs `domain` + environments to Vercel together (environments alone are not enough). Hit on two demos before the skill caught it.
+- 2026-09-15 `demo-setup`: custom-frontend path now clones the SE showcase
+  template (`storyblok-demo-showcase-se`) instead of the previous default SE
+  starter; Path A default recorded in local memory only.
+- 2026-09-08 `process-customer` re-run on a reopened partner-led RFP account:
+  the row was parked as "SE work complete / awaiting inbound" while a
+  stakeholder presentation + 30-min demo had already been scheduled. Rewrote
+  the Notion row (Notes + Next call), upgraded Economic Buyer Gap → Partial
+  from the **calendar invite** (highest-yield stakeholder source on a
+  partner-mediated deal with no direct customer contact), recorded a
+  deliberate competitive concession on one product area to protect the core
+  sell, built three demo stations sized to the real slot rather than to the
+  prospect's wish list, and extracted the English answer columns from two
+  submitted requirement grids into a local-only workbook (row/answer counts
+  verified against the original harvest record).
 - improve: custom-storyblok-demo — added audit 4d: components you build yourself must
   be tested across EVERY option/variant they expose (layout × media_type, etc.) on the
   deployed surface, not just the one path you tried; and consult prior demo repos for a
@@ -956,3 +976,45 @@ allowed here.)
   aren't clients. `darwin-setup` regenerates them per person.
 - Git *history* still contains pre-scrub client names — rewriting history
   (e.g. `git filter-repo`) is a separate manual step if the operator wants it.
+
+## 2026-09-15 — Busy Bees architecture RFI harvested into the RFP library
+
+- Validated submission added and renamed to convention:
+  `resources/rfp-library/validated-submissions/2026-09-15_BusyBees-Architecture-RFI_VALIDATED.docx`
+  (gitignored). 32 questions, architecture-grade, mandated artefact format
+  per question — the new reference example for technical RFIs.
+- **Five new category files** in `resources/rfp-library/answers/`:
+  `api-limits-webhooks.md`, `multi-space-governance.md`, `ai-governance.md`,
+  `observability-telemetry.md`, `exit-portability.md`. Library is now 16
+  category files (was 11).
+- **Existing categories extended**: `platform-architecture` (architecture-fit
+  answer shape, RACI, outage failure-mode matrix, environment topology,
+  honest boundaries incl. no PrivateLink), `security-compliance` (backup
+  contradiction resolved, SLA scope, identity limitation + hub-tenant
+  pattern, preview security flow, residency/subprocessors, accessibility
+  enforcement matrix), `editorial-experience` (lifecycle gaps: no
+  `unpublish_at`, no archive state, no review scheduler, no emergency
+  control — each with its pattern), `localisation` (three-model chooser,
+  Blocks/Group not translatable, Dimensions mechanics, hreflang split),
+  `seo-ai-discoverability` (element-by-element table, canonical/robots are
+  custom fields, llms.txt as a buildable pattern), `personalisation-
+  experimentation` (experimentation in a cached architecture, consent,
+  result-data ownership), `migration` (schema-before-content ordering, UUID
+  remapping, 6 req/s ceiling, webhook unreliability on bulk writes),
+  `pricing-licensing` (enterprise entitlement picture; Environments are
+  per-org not per-space; BYOAI and FlowMotion are paid add-ons),
+  `integrations` (FlowMotion = n8n-based, separately licensed),
+  `company-credentials` (support targets, GTC commitments, Accell Group and
+  Virgin Media O2 proof points).
+- **`_index.md`**: five new category rows, standing lessons 12–21, updated
+  trust-ranking note.
+- **`.claude/skills/rfp-answer/SKILL.md`**: new trust source 1b (GTC / SLA
+  exhibit / Order Form); new RETRIEVE step 1b (obey the mandated
+  per-question Format); new section "Architecture-grade RFIs — the
+  additional moves".
+- **Facts settled**: 14-day PITR vs 30-day S3 snapshots are two mechanisms,
+  not a contradiction (closes an open question from 2025-11-19); standing
+  lesson 9 (AWS certificate attribution) demonstrated correct in a real
+  submission for the first time. **Flagged unresolved**: two conflicting
+  SOC 2 Type II dates in the same document; webhook delivery-log retention
+  window unpublished.
