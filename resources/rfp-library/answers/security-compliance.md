@@ -32,7 +32,7 @@ Sources, in order of authority:
 
 Confirmed directly by the operator, who works at the company. This is the
 answer to use. It also means:
-- The Akeneo submission's **"SOC 2 Type I, never claim Type II"** was
+- An earlier validated submission's **"SOC 2 Type I, never claim Type II"** was
   **correct**.
 - The requirements grid's **"SOC 2 Type II certifications"** was **wrong** —
   Type II is in progress, not held. That answer went out in a real document

@@ -64,7 +64,7 @@ the repo, so it never has to be corrected twice.
    for one that already covers it** — `~/dev/darwin/.claude/skills/`,
    `~/.claude/skills/`, the SE team repo `~/dev/tools/se-ai-tools/skills/`
    (mature `replicate-*` site/section skills live there), and the current
-   project's own `.claude/skills/`. Near-miss: a Yugo retrospective almost
+   project's own `.claude/skills/`. Near-miss: a demo retrospective almost
    spawned a `replicate-site-demo` skill when a deep `replicate-site` already
    existed in the team repo, and most of the "new" gotchas were already
    captured inside `custom-storyblok-demo` / `storyblok-content`. Default to

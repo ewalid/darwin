@@ -6,6 +6,12 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-09-16 Guardrail 6 scrub, round two: removed real client/account names that had
+  crept back into tracked skills and library files since the 2026-07-23 pass —
+  `process-customer` (x2, incl. a real deal figure), `custom-storyblok-demo` (x6),
+  `darwin-improve` (x1), `security-compliance.md` (x1), and one CHANGELOG heading.
+  All replaced with role/shape descriptions that keep the lesson intact. Git *history*
+  still holds the originals — rewriting it stays a separate manual step.
 - 2026-09-16 Installed a centrally-maintained, versioned presales skill (v1.0.0) distributed
   as a `.skill` bundle: drafts SE Notes on CRM opportunities from recorded calls, with a
   contribution gate and a per-opportunity approval card before any write. Genericized two
@@ -977,11 +983,11 @@ allowed here.)
 - Git *history* still contains pre-scrub client names — rewriting history
   (e.g. `git filter-repo`) is a separate manual step if the operator wants it.
 
-## 2026-09-15 — Busy Bees architecture RFI harvested into the RFP library
+## 2026-09-15 — An architecture RFI harvested into the RFP library
 
 - Validated submission added and renamed to convention:
-  `resources/rfp-library/validated-submissions/2026-09-15_BusyBees-Architecture-RFI_VALIDATED.docx`
-  (gitignored). 32 questions, architecture-grade, mandated artefact format
+  `resources/rfp-library/validated-submissions/` under the dated naming
+  convention (gitignored). 32 questions, architecture-grade, mandated artefact format
   per question — the new reference example for technical RFIs.
 - **Five new category files** in `resources/rfp-library/answers/`:
   `api-limits-webhooks.md`, `multi-space-governance.md`, `ai-governance.md`,

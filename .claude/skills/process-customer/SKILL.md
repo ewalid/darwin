@@ -37,8 +37,8 @@ Five phases, in order.
    #se-requests and #sf-new-opps-notification) carry a real **Amount**
    field — capture it as deal-size evidence for the Notion ACV/TCV
    fields even when Salesforce itself isn't checked directly. (2026-08-06,
-   Monica Vinader: the bot's Amount matched the operator's own SF
-   screenshot exactly — EUR 41,666 — so it's a reliable substitute when
+   an FR retail deal: the bot's Amount matched the operator's own SF
+   screenshot exactly, to the euro — so it's a reliable substitute when
    the operator hasn't pasted a CRM extract yet.)
 5. **Gong, if a connector is present this session** (discover the real
    tool names/workspace at runtime — don't assume; check `memory.md`'s
@@ -118,7 +118,7 @@ one:
   or the operator's own confirmation over a Slack bot's "Opportunity
   Owner" field alone if the two ever disagree — bot notifications can
   reflect an earlier sourcing/BDR assignment rather than the current
-  owner (2026-08-06, Monica Vinader: an opp-creation bot post named one
+  owner (2026-08-06, an FR retail deal: an opp-creation bot post named one
   person, but the live SF screenshot plus the operator both confirmed a
   different person was the real AE).
 - **Next call / Deadline** — the concrete next milestone with a real

@@ -115,14 +115,15 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
 2. **Resolve the customer's local working directory.** Check `~/dev/accounts/`
    for a folder that's already a variant of the customer's name — different
    casing, spacing, or an abbreviation (that directory already has
-   inconsistent naming: `joué club`, `Group`, `implid-demo`/`implid-careers`
-   as separate folders for one account). If something matches, use it. Only
+   inconsistent naming: accented vs unaccented spellings, a bare `Group`,
+   and per-site suffixes as separate folders for one account). If something
+   matches, use it. Only
    create `~/dev/accounts/<Customer>/` if genuinely nothing matches — **ask
    the operator to confirm** on any ambiguity. Never silently create a second
    folder for the same customer under a different spelling. The
    same discipline covers the whole build: **one demo = one repo + one space
    + one deploy.** Don't start a second, parallel build of the same demo on a
-   different space/repo/Vercel URL — the Yugo demo ran as two overlapping
+   different space/repo/Vercel URL — one demo ran as two overlapping
    builds on two deploys, never reconciled, and the duplication was a top
    token sink. If a second one already exists, stop and reconcile to one
    before continuing.
@@ -210,7 +211,7 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       And **lock the locale model before building the frontend**:
       folder-per-locale (Dimensions) vs field-level i18n couples directly to
       the routing, so switching after the frontend exists rewrites both the
-      tree and the router — the single biggest time sink on the Yugo build,
+      tree and the router — the single biggest time sink on one custom build,
       which decided the model twice.
 
    c. **Asset & interactive rendering — components must honour the editor's
@@ -240,7 +241,7 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       image/video/youtube, `layout`, `card_style`, columns…) is only as done
       as the combination you actually tried; wiring and verifying one path is
       not the component. Enumerate the field's values and click each on the
-      DEPLOYED page — especially the headline use. Real miss (Boulanger,
+      DEPLOYED page — especially the headline use. Real miss (an FR retail demo,
       2026-08-26): a `page-hero` media picker was tested only as YouTube on an
       *inline* featured block, so the **full-bg + video/youtube** path was
       never wired and the hero's own primary use silently rendered nothing
@@ -248,9 +249,9 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       light/dark bg, empty vs filled) and run it before declaring done. And
       **before inventing a pattern the operator judges on feel** (a media/
       header picker, a hero), check prior demo repos first — the operator
-      pointed at Yugo's media header as the reference; a proven pattern they
-      already liked beats a fresh invention (`~/dev/accounts/*/` and the Yugo
-      repo).
+      pointed at an earlier demo's media header as the reference; a proven
+      pattern they already liked beats a fresh invention
+      (`~/dev/accounts/*/` and prior demo repos).
 
    Commit and push the fixes.
 
@@ -455,7 +456,8 @@ descriptions.
   create`, build, and deploy it — the CLI registers `body`/`compiled_body`/
   `space_ids` correctly. Writing those fields directly onto a `field_type`
   via MAPI produces a plugin that silently never renders in the editor (the
-  Yugo `pms-picker` burned a long session exactly this way). A field plugin
+  one build's custom picker plugin burned a long session exactly this way).
+  A field plugin
   also **cannot be verified headlessly** — it only renders inside the open
   editor — so debugging needs the operator's editor console, and you keep a
   datasource-backed `options` fallback ready (see the picker stand-in above)
