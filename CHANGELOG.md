@@ -6,6 +6,11 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- improve: high design-gap demo fidelity — compare structure (dark/light) before
+  brand-token polish; one surface PASS; lock Storyblok CDN assets; Cloudinary
+  `f_auto` breaks SVGs; self-serve LP = folder + whitelist body + default preset.
+  Folded into `custom-storyblok-demo`, `storyblok-content`, and local
+  `storyblok-demo-prep` gotchas after a marketing-site replication retrospective.
 - 2026-09-16 Guardrail 6 scrub, round two: removed real client/account names that had
   crept back into tracked skills and library files since the 2026-07-23 pass —
   `process-customer` (x2, incl. a real deal figure), `custom-storyblok-demo` (x6),

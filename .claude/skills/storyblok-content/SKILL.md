@@ -252,6 +252,18 @@ fails at exactly the moment someone tries.
   on a client-rendered frontend confirm it from the rendered DOM, not a
   status code.
 
+- **Cloudinary (or any image CDN) `f_auto` / `q_auto` on SVG logos breaks
+  them** in the browser. Prefer Storyblok CDN assets for demo logos; if an
+  external SVG URL is unavoidable, strip those transforms before render or
+  at write time. A white box / broken-image icon in a testimonials row is
+  usually this, not a missing component.
+- **Self-serve landing-page demo beat:** create a dedicated folder + root
+  content type whose `body` bloks field has `restrict_components: true` and
+  a tight whitelist (no commerce/blog/experiment blocks), a default
+  **Campaign LP** preset with a full starter body, and one published
+  example page. That is the guardrail story — schema enforce, not training.
+
+
 ## Guardrails
 
 - Never write to a Storyblok space without the dry-run → OK step,

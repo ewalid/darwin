@@ -390,6 +390,36 @@ descriptions.
 - **Don't churn MCP `search`** for space-settings writes — they aren't in the
   connector; go straight to Management API curl for token + environments.
 
+## Visual fidelity on high design-language-gap sites
+
+When the ask is "make it look like their live site" (high design-language gap),
+the expensive failure mode is **inventing a coherent aesthetic** (e.g. a dark
+editorial blog) and polishing brand hex on top — then learning from the
+operator's side-by-side screenshots that the source was light all along.
+
+**Before any Vue/React restyle of a marketing surface:**
+1. Open source + demo at the **same viewport**.
+2. Write a **≤5-row structural delta table** (page/section bg, chrome, meta
+   row, sidebar, body invert / typography role). **Dark vs light is
+   first-class**, not a color tweak.
+3. Change only those deltas. Do **not** ship a "match brand colors" commit
+   on a surface that failed the structure compare — accurate tokens on the
+   wrong layout make fiction look intentional.
+4. **One surface to PASS** before the next (home → listing → detail → LP).
+   Scope sprawl without a lock is what turns a short CSS job into a day.
+
+Prefer the team `replicate-site` / `replicate-section` quality gate
+(screenshot → reviewer) when the operator invoked it. Freehand restyles
+still owe the delta table.
+
+**Assets:** lock **one** delivery path at kickoff (prefer the CMS asset
+library / Storyblok CDN for demos). Do not mid-flight hop through a
+third-party image host and back — each hop forces re-wire, re-publish,
+and re-check. If a third-party URL must be used temporarily, never leave
+Cloudinary-style `f_auto` / `q_auto` transforms on **SVG** logos (they
+corrupt or 404); strip transforms or re-host the SVG on the CMS CDN.
+
+
 ## Guardrails
 
 - Tokens (Storyblok Preview, Shopify Storefront) live only in that project's
