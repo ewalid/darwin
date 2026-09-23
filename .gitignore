@@ -31,3 +31,6 @@ resources/case-study-database.md
 
 # Local Claude Code permission overrides — per-machine, not shared.
 .claude/settings.local.json
+
+# Scratch Claude/Cursor output dumps (RFP drafts, etc.) — local-only.
+Claude outputs/
