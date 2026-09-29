@@ -6,6 +6,9 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- improve: carousel character blur/brightness now animate through stable CSS
+  variables, preventing the first outgoing image from flashing white when its
+  base drop-shadow filter and transition filter were interpolated together.
 - 2026-09-29 Added a CMS-driven immersive character carousel to a retail demo:
   three schemas, six reusable image assets, a populated preset, and a published
   verification page. Activated an approved four-variant homepage experiment
