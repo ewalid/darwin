@@ -6,6 +6,10 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- improve: tightened the local-only 3D-demo quality bar after visual review —
+  one coherent character system, verified front-facing rest poses, richer
+  textured/glossy backgrounds, reference-led character palettes, and a soft
+  eased color-propagation edge instead of a rough hard wipe.
 - improve: recorded a local-only account visual direction for immersive 3D
   demos — keep all hero models in one coherent construction-toy character
   style, and preserve source/license details for every downloaded asset.
