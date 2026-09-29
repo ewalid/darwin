@@ -6,6 +6,8 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- improve: prefer polished animated hero imagery over visibly weak procedural
+  3D; retain 3D only when its assets clear the final visual quality bar.
 - improve: tightened the local-only 3D-demo quality bar after visual review —
   one coherent character system, verified front-facing rest poses, richer
   textured/glossy backgrounds, reference-led character palettes, and a soft
