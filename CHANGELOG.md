@@ -6,6 +6,10 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-09-29 Added a CMS-driven immersive character carousel to a retail demo:
+  three schemas, six reusable image assets, a populated preset, and a published
+  verification page. Activated an approved four-variant homepage experiment
+  and added four explicitly simulated result charts; no winner selected.
 - improve: prefer polished animated hero imagery over visibly weak procedural
   3D; retain 3D only when its assets clear the final visual quality bar.
 - improve: tightened the local-only 3D-demo quality bar after visual review —
