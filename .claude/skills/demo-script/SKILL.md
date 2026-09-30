@@ -48,7 +48,10 @@ decks match the customer's language, internal notes/briefs stay English).
    first version was written end-to-end with no chance to adjust
    framing before it was finalized.)
 
-4. **Write the full script** once confirmed:
+4. **Write the full script** once confirmed. **Default format: terse
+   bullets and sub-bullets, no prose paragraphs** — the operator reads it
+   live, mid-demo (stated 2026-09-30). Timings per station, clicks as
+   sub-bullets, one-line tells.
    - **Tell (opening)**: 2-3 sentences setting up the problem/context —
      tied to something specific from the brief (a stated pain point, a
      constraint from discovery), not a generic product pitch.

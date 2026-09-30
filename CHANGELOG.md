@@ -6,6 +6,23 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- improve: new `component-reuse` skill — tracks components that recur
+  across demos in a local, git-ignored registry and writes generalisation
+  plans; plan only, never a PR/push/merge on the SE team repo (operator only).
+  Seeded with 9 candidates (commerce grid + adapter, scroll story, block
+  style contract, scheduling, store locator + personalisation, …).
+- improve: `custom-storyblok-demo` gains "Standing build defaults" from two
+  retail builds: full scope now (no self-proposed session 2), push + deploy
+  every change and a mandatory remote, Style/Mobile/Planning tabs with outer
+  spacing on every block, nested blocks honoured in every host, schema script
+  as single source of truth, translation-ready from day one, real brand tokens
+  + operator-picked design direction, no baked-text banners, sidebar PLP
+  filters, mock-PIM pattern, personalisation wrapper, editor login at kickoff,
+  never overwrite an operator draft; plus MAPI gotchas (folder start pages,
+  lowercased asset names, CDN cache after space settings) and a close-out.
+- improve: `storyblok-content` — never overwrite or publish the operator's
+  draft; patch inside it. `demo-script` — terse bullets by default.
+  CLAUDE.md guardrail 13 — shared working trees: stage only your own changes.
 - improve: `storyblok-content` now treats “super visual” simulated experiment
   results as a 14–16-panel dashboard, with normalized metrics, in-panel fake
   data labels and no winner selection—not a sparse four-chart snapshot.

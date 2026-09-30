@@ -205,6 +205,13 @@ skill-by-skill.)
     reported as fine — four separate "I can't do this myself in the CMS"
     corrections across two builds.)
 
+13. **Shared working trees: stage only your own changes.** Other
+    sessions or agents may be committing in the same repo at the same
+    time. Never `git add -A`; add your own paths, `git pull --rebase`
+    before pushing, and flag any file you didn't write instead of
+    committing it. (2026-09-29: a parallel session's new component was
+    swept into an unrelated commit and deployed.)
+
 ## Priority logic (for briefings and triage)
 
 1. A demo today — always first.

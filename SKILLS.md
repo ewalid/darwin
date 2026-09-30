@@ -170,6 +170,15 @@ API), dry-run → OK → write → verify. Never clones a frontend or deploys
 Vercel. If they need a renderer the starter does not have, route to
 `custom-storyblok-demo` or the already-cloned demo repo.
 
+### `component-reuse`
+**Trigger:** the end of every custom demo build, a `darwin-improve`
+retrospective, or "what can we reuse / should this go in the SE team
+repo". **Does:** spots components that recur across demos, records them in
+a local, git-ignored registry, and writes a generalisation plan per
+candidate (schema, data contract, starting files, effort). **Plan only:**
+it never implements, and it never opens a PR, pushes or merges on the SE
+team repo — only the operator does that.
+
 ---
 
 ## Darwin maintaining itself

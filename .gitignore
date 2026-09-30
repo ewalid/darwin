@@ -34,3 +34,8 @@ resources/case-study-database.md
 
 # Scratch Claude/Cursor output dumps (RFP drafts, etc.) — local-only.
 Claude outputs/
+
+# Reusable-component registry — names the real demos each component came from.
+# Local-only, same class as accounts/. The tracked process is
+# .claude/skills/component-reuse/SKILL.md. (2026-09-30)
+resources/component-reuse/

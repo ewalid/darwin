@@ -324,6 +324,89 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    verified by this skill. After the PUT: hard-refresh VE and confirm the
    location dropdown shows Vercel, not `me.storyblok.com`.
 
+## Standing build defaults — never make the operator ask for these
+
+Two full retail builds (a jewellery storefront, then a two-brand toy
+retailer) each needed the operator to restate the same expectations mid-build
+("style tabs on every component", "deploy and push", "don't leave locales
+pending", "page.liquid again", "no session 2"). They are defaults now; apply
+them without being asked and say in the plan that they are applied.
+
+**Scope and cadence**
+- Build the whole agreed scope before the demo. Do not split work into a
+  "session 2" or "P2 if there's time" unless the operator proposes it — one
+  build was re-planned mid-night because the split was Darwin's idea, not
+  theirs.
+- After every change: commit, `git push`, `vercel deploy --prod`, verify on
+  the deployed URL. A repo with no remote is a defect — create the private
+  GitHub repo at standup (one earlier demo lived only on one laptop, with no
+  remote, and its previous copy was lost).
+- Shared working trees: other sessions may commit in the same repo. Stage
+  only your own paths (never `git add -A`), `git pull --rebase` before every
+  push, and flag any file you did not write instead of committing it.
+
+**Component contract (every block Darwin builds)**
+- Tabs: General, **Style** (background colour/custom/image/video with overlay,
+  text colour, inner spacing, **outer spacing**, alignment, width, shape, title
+  size), **Mobile** (hide, spacing, alignment, title size — mobile-only, never
+  changes desktop), **Planning** (visible from / until). Lots of options, all
+  brand tokens.
+- One shared wrapper renders the Style/Mobile tabs; one shared composable
+  renders Planning: hidden on the live site outside its window, always visible
+  with a dated badge in the Visual Editor, `?preview_date=` to simulate "now".
+- Nested blocks accepted by several hosts (a marketing tile in a catalogue
+  grid AND in a home collection) must honour their fields in **every** host —
+  a tile's Position/Width worked in one grid and was silently ignored in the
+  other until the operator hit it in the editor.
+- Equal-size cards by default; "featured" layouts only when there are more
+  items than columns.
+- Schema scripts are the single source of truth. Never patch a schema by hand
+  outside the script — re-running it silently reverts the patch (a font
+  option added ad hoc disappeared on the next run).
+
+**Language**
+- Lock the locale model at kickoff and finish it. If an AI-translation beat is
+  plausible, keep the languages in the space and mark copy fields
+  `translatable` from day one — languages removed "for simplicity" had to be
+  re-added and 180 fields flipped the night before a demo.
+- Field-level translation needs `use_translated_stories` **off** (on: both
+  `?language=` and `<lang>/<slug>` 404). Internal links must carry the
+  language prefix; brand/folder roots derived from `full_slug` must strip it.
+
+**Design and content**
+- Pull the real brand tokens (colours, fonts, SVG logo) from the prospect's
+  live site before designing. Then show 3–4 visual directions as a quick
+  inline mockup and let the operator pick or write their own — design
+  direction is the operator's call, and "ugly" came back twice when it wasn't
+  checked.
+- Never use campaign banners with text baked into the image as hero/tile
+  visuals — they look pasted-in and low-res. Use product packshots in a framed
+  "product box" treatment, or clean imagery, with real editable copy.
+- Commerce listing pages: filters in a sticky left sidebar (collapsible groups,
+  counts, active chips, mobile drawer), not a pill bar above the grid.
+- No real catalogue → a mock PIM: a JSON file of the prospect's own public
+  products + API routes + datasources synced for editor pickers. Verify each
+  product fact against its source page (an age range was wrong until checked).
+- Location/segment content (a store, a region) → a personalisation wrapper
+  with one variant per segment, a fallback ("choose your store") or hide mode,
+  and an editor preview switcher.
+
+**Surfaces and drafts**
+- Ask at kickoff (with the other human-gated asks) for the operator to log the
+  browser pane into the CMS, so the Visual Editor can actually be checked
+  (guardrail 12). Two builds shipped with "not verified in the editor".
+- Before any write, check `unpublished_changes`. If the operator has a draft in
+  progress, patch only the target block inside that draft, save without
+  publishing, and say so — never overwrite or publish their draft.
+
+**Close-out**
+- Run a schema-vs-content validator before calling content done (undeclared
+  fields, `max_length`, required, bloks whitelists, publish state) — a script
+  for this lives in the latest demo's build folder (path in local memory).
+- Finish every custom build by running **`component-reuse`**: log what this
+  build created that recurs across demos, and update the plans. Plan only;
+  never a PR or merge on the SE team repo.
+
 ## Working with the Storyblok Management API / MCP
 
 Mechanics learned the hard way — none of these are obvious from the tool
@@ -375,6 +458,17 @@ descriptions.
   editor gets real search over everything, in a chosen order. Say plainly
   that the datasource is a snapshot needing re-sync, and that a
   collection/category-driven field avoids the staleness entirely.
+
+- **Folders and start pages.** Creating a folder with `default_root` can
+  auto-create an empty `<folder>/<folder>` start-page story — list the folder
+  after creating it and remove empties. Setting `is_startpage` on a `home`
+  story renames its `full_slug` to `<folder>/` and breaks any route that fetches
+  `<folder>/home`.
+- **Asset filenames are lowercased** on upload — look assets up
+  case-insensitively.
+- **Space-setting changes and the CDN cache.** After changing a space setting
+  (languages, translated stories), cached 404s keep being served until the
+  cache version bumps — republish any clean story to force it.
 
 ## Efficiency notes (what changed after the first run, and why)
 

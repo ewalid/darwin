@@ -305,6 +305,12 @@ fails at exactly the moment someone tries.
   onto the new field instead. Diff discipline on schema edits is not
   optional: a schema update should read as "N new fields added," never
   as changes to lines that were already there.
+- **Never overwrite or publish the operator's draft.** Before a write,
+  read `unpublished_changes`. If the operator has edits in progress, apply
+  only the targeted change inside the current draft content, save without
+  `publish`, and tell them the draft now also carries your change. Re-running
+  a full content script would have silently reverted their edits (they had
+  removed a hero and a section in the editor the same night).
 - **Never accept a proxy for the surface a claim is about.** An HTTP
   200 proves nothing on a client-rendered frontend — every route returns
   200 with an empty shell, so a status code once stood in as evidence a

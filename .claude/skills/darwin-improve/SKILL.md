@@ -33,7 +33,9 @@ the repo, so it never has to be corrected twice.
    project was chaotic, what should change?"), not just a single in-the-moment
    correction — mine the relevant prior sessions (session-mgmt
    `search`/`list_events`) to ground the fixes in what actually happened
-   before writing them.
+   before writing them. For a demo-build retrospective, also run
+   **`component-reuse`**: capabilities rebuilt across demos are process
+   friction too (the same grid, map or scroll story rebuilt per prospect).
 
 2. **Identify the friction.** What exactly was wrong or missing? Quote it
    back in your own head before acting — vague understanding produces a
