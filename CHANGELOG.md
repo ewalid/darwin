@@ -6,6 +6,9 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- improve: `storyblok-content` now composites transparent character assets on
+  their real target backgrounds and inspects fine edges before upload; replaced
+  one checkerboard-contaminated demo asset and added six reusable slide presets.
 - improve: new `component-reuse` skill — tracks components that recur
   across demos in a local, git-ignored registry and writes generalisation
   plans; plan only, never a PR/push/merge on the SE team repo (operator only).

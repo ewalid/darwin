@@ -235,6 +235,12 @@ fails at exactly the moment someone tries.
   Without them the editor offers no focal-point picker and there are no
   source dimensions to compute a crop from, so the feature looks
   unimplemented. A bare URL written by a script is not a library asset.
+- **Transparent character assets need edge QA on the real target
+  background before upload.** A PNG can report a valid alpha channel while
+  still containing opaque generated checkerboard fragments or a white matte
+  around fine details. Composite it over the actual dark and light surfaces,
+  inspect extremities at high zoom, and reject any halo, block, stray pixel or
+  jagged cutout before it reaches a preset or published story.
 - **Experiment results are pushed in, not read out.** The Results tab
   says "push results from your analytics tool" and means it literally:
   `POST /experiments/:id/results` with a `charts` array (bar/line/text).
