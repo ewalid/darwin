@@ -6,6 +6,9 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- improve: `storyblok-content` now treats “super visual” simulated experiment
+  results as a 14–16-panel dashboard, with normalized metrics, in-panel fake
+  data labels and no winner selection—not a sparse four-chart snapshot.
 - improve: carousel character blur/brightness now animate through stable CSS
   variables, preventing the first outgoing image from flashing white when its
   base drop-shadow filter and transition filter were interpolated together.

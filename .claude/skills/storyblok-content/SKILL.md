@@ -244,6 +244,13 @@ fails at exactly the moment someone tries.
   is server-controlled and cannot be backdated, so any figures spanning
   more days than the experiment has run must be labelled illustrative,
   inside the panel rather than only in the deck.
+- **"Super visual" fake results means a dashboard, not four token charts.**
+  Default to 14–16 internally consistent panels (API maximum: 20): two
+  labelled text panels, a broad set of bars covering the primary KPI,
+  funnel, revenue, engagement, traffic and device cuts, plus several trend
+  lines. Normalize cumulative metrics when traffic weights differ, keep the
+  fake-data warning inside the first and last panels, and never select a
+  winner from simulated evidence.
 - **Decide draft-versus-published deliberately, then verify the state.**
   Publishing is right when a live URL is the deliverable; staying draft
   is right when the point is to show an editorial workflow. Either way
