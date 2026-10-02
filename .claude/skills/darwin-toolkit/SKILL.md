@@ -3,25 +3,27 @@ name: darwin-toolkit
 description: >
   Trigger during darwin-setup on a new computer, on request to install or
   verify Darwin's external toolkit, before a frontend landing-page/redesign
-  task that needs the Taste skill, when OmniRoute could provide model routing
-  or AI tools, or when a task needs external public data. Installs or connects
-  supported capabilities safely: the design-taste-frontend skill, OmniRoute
-  through an official Cursor plugin if one exists or otherwise MCP, and the
-  public-apis/public-apis catalogue as a discovery index with independent
-  provider verification.
+  task that needs the Taste skill, when a React project needs a real 3D
+  interface, when OmniRoute could provide model routing or AI tools, or when a
+  task needs external public data. Installs or connects supported capabilities
+  safely: the design-taste-frontend skill, React Three Fiber when the project
+  is compatible, OmniRoute through an official Cursor plugin if one exists or
+  otherwise MCP, and the public-apis/public-apis catalogue as a discovery
+  index with independent provider verification.
 ---
 
 # darwin-toolkit
 
 ## Purpose
 
-Make three optional capabilities reproducible on any computer running this
+Make four optional capabilities reproducible on any computer running this
 Darwin repository:
 
 1. `design-taste-frontend` for marketing pages, landing pages, portfolios and
    visual redesigns.
-2. OmniRoute for model routing and its agent tools.
-3. `public-apis/public-apis` for discovering external data sources.
+2. React Three Fiber for justified 3D experiences in React applications.
+3. OmniRoute for model routing and its agent tools.
+4. `public-apis/public-apis` for discovering external data sources.
 
 This is a bootstrap and routing skill. It does not copy third-party
 documentation into Darwin, commit credentials, or assume that a capability is
@@ -29,8 +31,9 @@ installed merely because another computer had it.
 
 ## Run modes
 
-- **Bootstrap:** during `darwin-setup`, check all three capabilities and offer
-  to install/connect anything missing.
+- **Bootstrap:** during `darwin-setup`, check the global/project capabilities
+  and offer to install/connect anything missing. React Three Fiber is only
+  checked inside a relevant application, never installed into Darwin itself.
 - **Task-triggered:** check only the capability relevant to the current task.
 - **Audit:** report installed, reachable, missing and blocked items without
   changing the machine.
@@ -70,7 +73,62 @@ tables or multi-step product workflows; the skill explicitly excludes those.
 Do not reproduce or paraphrase the Taste rules here. The installed skill is
 the source of truth.
 
-## 2. OmniRoute
+## 2. React Three Fiber
+
+Official documentation:
+[`r3f.docs.pmnd.rs`](https://r3f.docs.pmnd.rs/getting-started/installation).
+
+### When to use it
+
+Use React Three Fiber (R3F) when all of these are true:
+
+- the application uses React;
+- 3D materially improves the requested experience, rather than decorating it;
+- the interaction needs a scene graph, camera, lighting, models or
+  frame-driven animation that normal CSS/DOM cannot express well;
+- the bundle, rendering and mobile-performance cost is acceptable.
+
+Do not install it during general Darwin setup. Do not use it in Vue/Nuxt:
+R3F is a React renderer. For non-React projects, select a framework-native
+renderer or Three.js directly after checking the existing stack. Do not rewrite
+a working application into React merely to use R3F.
+
+### Install safely
+
+1. Read the target application's `package.json` and determine its React major,
+   package manager and rendering framework.
+2. Preserve the existing package manager and lockfile.
+3. Pair versions correctly:
+   - React 18 → `@react-three/fiber@8`
+   - React 19 → `@react-three/fiber@9`
+4. Preview the dependency change, then install in the target application:
+
+   ```bash
+   pnpm add three @react-three/fiber
+   ```
+
+   Use the project's actual package manager. Add `@react-three/drei` only when
+   a required abstraction justifies it; it is not part of the base install.
+5. For Next.js, add `three` to `transpilePackages` only if untranspiled
+   ecosystem add-ons require it. Do not change configuration speculatively.
+
+### Build and verification rules
+
+- Keep the canvas in a client-only leaf; do not force the page tree to become
+  client-rendered.
+- Lazy-load non-critical scenes and large models.
+- Reserve canvas dimensions to prevent layout shift.
+- Dispose geometries, materials, textures and listeners.
+- Honor reduced motion and provide a useful static fallback.
+- Optimize GLB/GLTF assets and textures before shipping.
+- Test the actual interaction on desktop and mobile, including low-power
+  behavior, resizing, context loss and keyboard/pointer alternatives.
+- Check bundle impact and Core Web Vitals. A visually impressive scene that
+  breaks the primary content or demo path fails.
+- Reuse the Taste skill's design direction, but do not add 3D merely because
+  the library is available.
+
+## 3. OmniRoute
 
 ### Choose the supported integration at runtime
 
@@ -161,7 +219,7 @@ MCP. Use `omniroute setup-cursor` for current instructions; it prints manual
 Cursor steps because Cursor stores that configuration in opaque local state.
 Do not edit Cursor's internal SQLite.
 
-## 3. Public API discovery
+## 4. Public API discovery
 
 ### Correct role
 
@@ -232,6 +290,8 @@ Report:
 End bootstrap/audit with:
 
 - Taste: installed and readable | missing | blocked
+- React Three Fiber: not applicable | existing and version-compatible |
+  installed and verified | blocked
 - OmniRoute: plugin or MCP path, local/remote, health result | missing | blocked
 - Public APIs: catalogue reachable; no API selected unless the current task
   required one

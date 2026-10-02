@@ -9,9 +9,11 @@ that is safe to share with colleagues. Update it alongside any `improve:` commit
 - feat: new `darwin-toolkit` skill makes optional capabilities reproducible
   across computers: installs/verifies the frontend Taste skill, connects
   OmniRoute through a verified official Cursor plugin or its supported MCP
-  server (remote preferred), and uses the Public APIs repository strictly as a
-  discovery index with provider-doc, licensing, privacy and live-request
-  verification. `darwin-setup` now runs its bootstrap check on fresh installs.
+  server (remote preferred), installs version-matched React Three Fiber only
+  inside React projects where 3D is justified, and uses the Public APIs
+  repository strictly as a discovery index with provider-doc, licensing,
+  privacy and live-request verification. `darwin-setup` now runs its bootstrap
+  check on fresh installs.
 - improve: `storyblok-content` now composites transparent character assets on
   their real target backgrounds and inspects fine edges before upload; replaced
   one checkerboard-contaminated demo asset and added six reusable slide presets.
