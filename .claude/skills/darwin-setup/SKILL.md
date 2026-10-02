@@ -120,6 +120,12 @@ claude.ai connector settings (or `claude mcp` / `/mcp` in an
 interactive session) to add it — setup can't run that OAuth flow
 itself.
 
+After connector checks, run `darwin-toolkit` in **Bootstrap** mode. It
+checks the project frontend-design skill, offers the supported OmniRoute
+plugin/MCP path, and confirms the public-API discovery catalogue is
+reachable. Preview and ask before installing software/plugins or changing
+global MCP configuration; missing optional toolkit items do not block setup.
+
 ## Step 5 — where the real data lives
 
 For each connected tool that's actually load-bearing, get the specific
