@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-06 — improve: custom-storyblok-demo re-reads space settings after the preview-URL PUT and at close-out (a demo space silently reverted domain/environments/languages → `page.liquid is missing` again); no pre-made translations or pre-built live-beat pages.
 - feat: new `darwin-toolkit` skill makes optional capabilities reproducible
   across computers: installs/verifies the frontend Taste skill, connects
   OmniRoute through a verified official Cursor plugin or its supported MCP

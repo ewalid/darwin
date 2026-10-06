@@ -324,6 +324,19 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    verified by this skill. After the PUT: hard-refresh VE and confirm the
    location dropdown shows Vercel, not `me.storyblok.com`.
 
+   **The PUT response is not proof — the setting can silently revert.**
+   On a freshly provisioned Solutions Demo space the whole settings object
+   (`domain`, `environments`, `languages`) came back to its original values
+   about an hour after a PUT that returned 200 with the new values: the
+   provisioning job finishing late, or a Settings page opened earlier and
+   saved afterwards with a stale form. The operator then opened the VE on
+   `page.liquid is missing` — the third build to hit it (2026-10-06).
+   So: (1) wait ~60s after the PUT and **GET the space again** — `domain`,
+   `environments`, `options.languages`; (2) **re-GET it once more right
+   before handing over** (it is a close-out gate, see below); (3) if it
+   reverted, re-PUT and re-read; and tell the operator not to save the
+   space Settings page from a tab opened before the change.
+
 ## Standing build defaults — never make the operator ask for these
 
 Two full retail builds (a jewellery storefront, then a two-brand toy
@@ -369,6 +382,11 @@ them without being asked and say in the plan that they are applied.
   plausible, keep the languages in the space and mark copy fields
   `translatable` from day one — languages removed "for simplicity" had to be
   re-added and 180 fields flipped the night before a demo.
+- Do not pre-fill translations, and do not pre-build the page a live beat
+  will create (AI page generation, live translation). Those are the operator's
+  moves in the room; a pre-made copy spoils the beat and leaves the same page
+  twice in the tree. Prepare the brief/prompt instead, and verify the
+  mechanism on a throwaway you remove afterwards (2026-10-06).
 - Field-level translation needs `use_translated_stories` **off** (on: both
   `?language=` and `<lang>/<slug>` 404). Internal links must carry the
   language prefix; brand/folder roots derived from `full_slug` must strip it.
@@ -400,6 +418,10 @@ them without being asked and say in the plan that they are applied.
   publishing, and say so — never overwrite or publish their draft.
 
 **Close-out**
+- Re-read the space settings (`GET /v1/spaces/<id>`) as the last step before
+  handing over: `domain` and the first environment must be the Vercel URL,
+  and the languages must be the locked set. Never report "preview wired"
+  from the PUT response alone (step 9).
 - Run a schema-vs-content validator before calling content done (undeclared
   fields, `max_length`, required, bloks whitelists, publish state) — a script
   for this lives in the latest demo's build folder (path in local memory).
