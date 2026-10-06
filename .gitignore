@@ -39,3 +39,7 @@ Claude outputs/
 # Local-only, same class as accounts/. The tracked process is
 # .claude/skills/component-reuse/SKILL.md. (2026-09-30)
 resources/component-reuse/
+
+# Third-party skills installed per machine by `npx skills add` (darwin-toolkit): local, not versioned
+.agents/
+skills-lock.json
