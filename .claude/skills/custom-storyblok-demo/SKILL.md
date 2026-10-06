@@ -55,6 +55,51 @@ vars via CLI, wire both preview URLs into the CMS.
 > tracked skill. This file stays a generic process; memory supplies the
 > specifics at run time.
 
+## Kickoff checklist — one message, then build
+
+A full same-day build (2026-10-06) was fast but still lost its time in the
+same places: decisions Darwin made alone that were the operator's, a router
+built for one locale axis, a field contract applied after the fact, and a
+hero rebuilt instead of reused. Do these up front:
+
+1. **Ask the operator-owned decisions in ONE early message, and keep building
+   whatever doesn't depend on them while waiting.** Never "lock" these alone,
+   even under time pressure. Give the evidence and a recommendation, then let
+   the operator choose:
+   - **Locale model:** field-level translation, market folders (Dimensions),
+     or both. **Whatever the answer, build the router for both axes from
+     day one** (`/de/...` = folder, `/de/fr/...` = translation of an `fr/` page,
+     `_storyblok_lang`). It is cheap, and switching later rewrites the tree and
+     the router.
+   - **Page types:** which folder gets a locked template, and which pages
+     (home!) stay on the flexible page type. Lock only what was asked for.
+   - **Design direction and site chrome:** mirror the prospect's live chrome
+     (announcement bar, nav, footer). Add no chrome they don't have (e.g. a
+     language switcher) unless asked.
+   - **Browser pane logged into the CMS,** so the Visual Editor can actually
+     be checked (guardrail 12).
+2. **Start from proven components, not a blank file.** Check the local
+   reuse registry (`resources/component-reuse/registry.md`) for the hero,
+   image/video media, rich-text body, locale router, landing-page template,
+   announcement bar and build scripts. The operator names past demos as the
+   reference ("like we did for X"); the registry says where X lives.
+3. **Apply the component contract on the FIRST schema push,** not after
+   feedback: rich-text body copy, image-or-video media, default presets,
+   help text on every option, theme colour roles (see "Standing build
+   defaults").
+4. **Verification mechanics:**
+   - Navigate with a cache-buster (`?v=n`) after each deploy. A stale bundle
+     looks exactly like a failed fix.
+   - Run the URL matrix for routing, including the editor's translation path
+     `<lang>/<full_slug>`.
+   - Run the block × theme contrast matrix and a 375px width check.
+   - Re-read the space settings at the end.
+   - Run `vercel deploy` with a 5-minute timeout or in the background (the
+     2-minute default cuts it off).
+5. **Brief research agents with facts, not guesses.** Read the space name
+   and the prospect's site before describing the prospect in a subagent
+   prompt.
+
 ## Two template paths — decide this FIRST
 
 - **Path A — the operator has a starter/template repo they duplicate for
