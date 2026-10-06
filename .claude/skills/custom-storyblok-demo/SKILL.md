@@ -408,6 +408,14 @@ them without being asked and say in the plan that they are applied.
   moves in the room; a pre-made copy spoils the beat and leaves the same page
   twice in the tree. Prepare the brief/prompt instead, and verify the
   mechanism on a throwaway you remove afterwards (2026-10-06).
+- **Market folders AND field-level translation in one space** (Dimensions
+  folders `fr/ de/ es/` whose pages also get translated field by field): the
+  Visual Editor previews a translation as `<lang>/<full_slug>`, e.g.
+  `de/fr/landing-pages/x`. A router that reads the first segment only as a
+  market folder looks for `de/fr/...` and 404s. Read a language code followed
+  by a market folder as "translation of that page", honour `_storyblok_lang`,
+  and strip the `de/` that Storyblok already adds to resolved links, or nav
+  links come out as `/de/de/fr` (2026-10-06).
 - Field-level translation needs `use_translated_stories` **off** (on: both
   `?language=` and `<lang>/<slug>` 404). Internal links must carry the
   language prefix; brand/folder roots derived from `full_slug` must strip it.

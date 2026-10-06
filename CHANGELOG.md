@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-06 — improve: custom-storyblok-demo covers market folders + field-level translation together (VE previews `<lang>/<full_slug>`; router and links must handle it).
 - 2026-10-06 — improve: custom-storyblok-demo component contract adds rich-text body copy, image-or-video media fields, default presets per block, a theme × block contrast matrix check, and the Tailwind 4 layer gotcha.
 - 2026-10-06 — improve: custom-storyblok-demo re-reads space settings after the preview-URL PUT and at close-out (a demo space silently reverted domain/environments/languages → `page.liquid is missing` again); no pre-made translations or pre-built live-beat pages.
 - feat: new `darwin-toolkit` skill makes optional capabilities reproducible
