@@ -371,6 +371,27 @@ them without being asked and say in the plan that they are applied.
   grid AND in a home collection) must honour their fields in **every** host —
   a tile's Position/Width worked in one grid and was silently ignored in the
   other until the operator hit it in the editor.
+- **Body copy is rich text.** Descriptions, intros, answers and paragraphs
+  use a `richtext` field with a trimmed toolbar (bold, italic, link, lists).
+  Titles, labels and one-liners stay `text`. Render through one shared
+  wrapper that also accepts a legacy plain string, and migrate existing
+  content in place rather than re-seeding it (operator preference, 2026-10-06).
+- **Media fields take image or video** (`filetypes: images, videos`), rendered
+  by one shared component. Vue sets `muted` as a property, so autoplay needs
+  `el.muted = true` and an explicit `play()` on mount and on asset change.
+- **Every block ships a default preset.** A block added in the editor
+  arrives empty (only `component` + `_uid`); a default preset makes it
+  arrive with placeholder copy and a brand image. Re-check `preset_id`
+  after re-running the schema script.
+- **Theme tokens are colour roles, not fixed colours.** Before calling a
+  themed library done, render every block × every theme on a throwaway draft
+  page and measure text contrast against its real background (AA: 4.5, or
+  3 for 24px+), then delete the page. One audit found an invisible primary
+  button, an invisible quote and an invisible highlight that way.
+- **Unlayered CSS beats Tailwind 4 utilities.** A custom class that sets
+  `display` (a button) silently overrides `hidden` / `md:inline-flex`.
+  Put component classes in `@layer components`, and check the page
+  width equals the viewport at 375px.
 - Equal-size cards by default; "featured" layouts only when there are more
   items than columns.
 - Schema scripts are the single source of truth. Never patch a schema by hand
