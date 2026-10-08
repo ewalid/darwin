@@ -437,6 +437,12 @@ them without being asked and say in the plan that they are applied.
   `display` (a button) silently overrides `hidden` / `md:inline-flex`.
   Put component classes in `@layer components`, and check the page
   width equals the viewport at 375px.
+- **Fullscreen sections are not cards.** Keep their viewport edges square.
+  In nested sticky layouts, apply the fixed-header offset exactly once: if
+  the parent panel already sticks below the header, its sticky child uses
+  `top: 0`, not the header height again. Include a short-desktop gate around
+  1024×500 and measure that the full copy and CTA remain inside the viewport;
+  a standard laptop screenshot does not catch this class of clipping.
 - Equal-size cards by default; "featured" layouts only when there are more
   items than columns.
 - Schema scripts are the single source of truth. Never patch a schema by hand

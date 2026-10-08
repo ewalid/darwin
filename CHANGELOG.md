@@ -6,6 +6,9 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-08 — improve: fullscreen demo sections now keep square viewport
+  edges, count fixed-header offsets only once in nested sticky layouts, and
+  include a short-desktop CTA-clipping gate around 1024×500.
 - 2026-10-06 — improve: custom-storyblok-demo gets a kickoff checklist from the Pennylane retrospective (ask operator-owned decisions in one message, dual-axis locale router from day one, start from the reuse registry, contract on the first schema push, verification mechanics); reuse registry +5 candidates (hero, media/rich text, locale router, landing-page template, announcement bar).
 - 2026-10-06 — improve: custom-storyblok-demo covers market folders + field-level translation together (VE previews `<lang>/<full_slug>`; router and links must handle it).
 - 2026-10-06 — improve: custom-storyblok-demo component contract adds rich-text body copy, image-or-video media fields, default presets per block, a theme × block contrast matrix check, and the Tailwind 4 layer gotcha.
