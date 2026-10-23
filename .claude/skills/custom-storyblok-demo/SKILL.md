@@ -399,6 +399,16 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    provisioning job finishing late, or a Settings page opened earlier and
    saved afterwards with a stale form. The operator then opened the VE on
    `page.liquid is missing` — the third build to hit it (2026-10-06).
+   **Second cause, same symptom: the editor remembers its preview location
+   per space in the browser.** If the operator opened the Visual Editor
+   before the PUT, the editor keeps showing the old `me.storyblok.com`
+   location even though `domain` and `environments` are correct server-side
+   (confirmed 2026-10-23: settings untouched in the audit log, fixed by
+   picking "Vercel" in the editor's location dropdown). Before re-PUTting,
+   read the space via the MCP (`getSpace` + `listActivities` type Space): if
+   the settings are right and unchanged, tell the operator to pick the Vercel
+   location in the dropdown and hard-refresh. Say this proactively in the
+   hand-over, because the space is usually opened before the domain is set.
    So: (1) wait ~60s after the PUT and **GET the space again** — `domain`,
    `environments`, `options.languages`; (2) **re-GET it once more right
    before handing over** (it is a close-out gate, see below); (3) if it
