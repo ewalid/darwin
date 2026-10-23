@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-23 — improve: CLAUDE.md "Connected tools first": use a connector for every read/write it covers, troubleshooting included; raw API only for gaps, stated.
 - 2026-10-23 — improve: custom-storyblok-demo is now MCP-first for CMS work
   (MAPI only for settings, roles and schema scripts), announces reused plumbing
   at kickoff, briefs parallel builder agents with disjoint file lists, and

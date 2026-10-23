@@ -218,6 +218,16 @@ skill-by-skill.)
 2. A deadline closing today (EOD) or this week — second.
 3. Everything else.
 
+## Connected tools first
+
+When a connector exists for a system (Storyblok MCP, Notion, Slack, Gmail…),
+use it for every read and write it covers — including quick checks and
+troubleshooting reads, not only builds. Fall back to raw API calls only for
+what the connector genuinely lacks, and say so in one line. (2026-10-23: the
+operator said "you have the MCP" twice in one session; the second time was a
+quick settings read during troubleshooting, after the rule had only been
+added to one demo skill.)
+
 ## Invoking skills
 
 When a request matches a Darwin skill, invoke it through the Skill tool so
