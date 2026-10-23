@@ -78,16 +78,28 @@ hero rebuilt instead of reused. Do these up front:
      language switcher) unless asked.
    - **Browser pane logged into the CMS,** so the Visual Editor can actually
      be checked (guardrail 12).
-2. **Start from proven components, not a blank file.** Check the local
+2. **Use the Storyblok MCP for every CMS operation it covers** (inspecting the
+   space, folders, stories, workflows, workflow stage changes, assets). Fall
+   back to Management API scripts only for what the MCP lacks: space settings
+   (`domain`, environments, languages), space roles, and the idempotent
+   schema / preset / datasource scripts. Say which path you used and why. The
+   operator corrected a build that inspected the space with curl while the MCP
+   was connected (2026-10-23).
+   **Announce reuse before porting it.** When you take plumbing from a previous
+   demo, say in the kickoff message which demo and which parts (router,
+   wrapper, hero, scripts), and that its brand, copy and content scripts get
+   stripped. Porting silently reads as "why are you using another customer's
+   stuff?" (2026-10-23).
+3. **Start from proven components, not a blank file.** Check the local
    reuse registry (`resources/component-reuse/registry.md`) for the hero,
    image/video media, rich-text body, locale router, landing-page template,
    announcement bar and build scripts. The operator names past demos as the
    reference ("like we did for X"); the registry says where X lives.
-3. **Apply the component contract on the FIRST schema push,** not after
+4. **Apply the component contract on the FIRST schema push,** not after
    feedback: rich-text body copy, image-or-video media, default presets,
    help text on every option, theme colour roles (see "Standing build
    defaults").
-4. **Verification mechanics:**
+5. **Verification mechanics:**
    - Navigate with a cache-buster (`?v=n`) after each deploy. A stale bundle
      looks exactly like a failed fix.
    - Run the URL matrix for routing, including the editor's translation path
@@ -96,9 +108,20 @@ hero rebuilt instead of reused. Do these up front:
    - Re-read the space settings at the end.
    - Run `vercel deploy` with a 5-minute timeout or in the background (the
      2-minute default cuts it off).
-5. **Brief research agents with facts, not guesses.** Read the space name
+6. **Brief research agents with facts, not guesses.** Read the space name
    and the prospect's site before describing the prospect in a subagent
    prompt.
+7. **Parallel builder agents: give each a disjoint file list** (blocks +
+   their schema modules), one reference block to copy, and the contract.
+   Two traps from a build that ran three agents at once (2026-10-23):
+   - **Renaming a ported prefix:** never blanket-`sed` a short prefix that
+     collides with Tailwind utilities (`pl-` is also padding-left). Match
+     the identifier forms explicitly (`Pl[A-Z]`, `pl-<component>`,
+     `--pl-`), then lint.
+   - **The starter's pre-commit hook lints the whole working tree,**
+     including agents' unfinished files. Commit when agents finish. If you
+     must commit mid-flight, lint only your staged files, commit with
+     `--no-verify`, say so, and let the final commit go through the hook.
 
 ## Two template paths — decide this FIRST
 
@@ -566,6 +589,14 @@ descriptions.
   after creating it and remove empties. Setting `is_startpage` on a `home`
   story renames its `full_slug` to `<folder>/` and breaks any route that fetches
   `<folder>/home`.
+- **MAPI/MCP write validation is partial and type-strict.** Story writes
+  reject empty required fields (so a "block added empty" test page can only
+  hold blocks without required fields; presets cover the rest), `number`
+  fields must be sent as strings (`"8"`, not `8`), and a story inside a
+  workflow can't be published via API until it reaches a stage that allows
+  publishing (move it with `createWorkflowStageChange` first). The MCP's
+  `updateStory` also takes `ai_translate_language`, a backup path for a
+  live AI-translation beat.
 - **Asset filenames are lowercased** on upload — look assets up
   case-insensitively.
 - **Space-setting changes and the CDN cache.** After changing a space setting

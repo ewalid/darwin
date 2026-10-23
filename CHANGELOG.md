@@ -6,6 +6,12 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-23 — improve: custom-storyblok-demo is now MCP-first for CMS work
+  (MAPI only for settings, roles and schema scripts), announces reused plumbing
+  at kickoff, briefs parallel builder agents with disjoint file lists, and
+  warns about prefix-rename collisions with Tailwind, the whole-tree lint hook,
+  and MAPI write validation (required fields, numbers as strings, workflow
+  gates on publish). CLAUDE.md: invoke matching skills through the Skill tool.
 - 2026-10-08 — improve: fullscreen demo sections now keep square viewport
   edges, count fixed-header offsets only once in nested sticky layouts, and
   include a short-desktop CTA-clipping gate around 1024×500.

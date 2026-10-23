@@ -218,6 +218,13 @@ skill-by-skill.)
 2. A deadline closing today (EOD) or this week — second.
 3. Everything else.
 
+## Invoking skills
+
+When a request matches a Darwin skill, invoke it through the Skill tool so
+the operator can see it running. Reading its SKILL.md and following it
+silently doesn't count. The operator asked "are you using Darwin skills as I
+told you?" when a build followed a skill without invoking it (2026-10-23).
+
 ## How I improve
 
 Every friction becomes a permanent fix — via `darwin-improve`. There's
