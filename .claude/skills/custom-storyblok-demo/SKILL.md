@@ -147,6 +147,14 @@ hero rebuilt instead of reused. Do these up front:
      including agents' unfinished files. Commit when agents finish. If you
      must commit mid-flight, lint only your staged files, commit with
      `--no-verify`, say so, and let the final commit go through the hook.
+   - **Assert every scripted edit matched.** The starter's `eslint --fix`
+     reformats CSS and Vue files, one-line rules included, so a later
+     `str.replace` against the text you originally wrote silently does
+     nothing. Check the match count (`assert s.count(old) == 1`, or `re.subn`
+     and check `n`), or use the Edit tool, which fails loudly. In regex
+     replacement strings, never escape `.`: `"\\.bt-wrap {"` writes a
+     literal backslash into the selector. (2026-10-24: three edits no-op'd
+     and one wiped the mobile gutter before a deployed check caught it.)
 
 ## Two template paths — decide this FIRST
 
@@ -463,11 +471,26 @@ them without being asked and say in the plan that they are applied.
   push, and flag any file you did not write instead of committing it.
 
 **Component contract (every block Darwin builds)**
-- Tabs: General, **Style** (background colour/custom/image/video with overlay,
-  text colour, inner spacing, **outer spacing**, alignment, width, shape, title
-  size), **Mobile** (hide, spacing, alignment, title size — mobile-only, never
-  changes desktop), **Planning** (visible from / until). Lots of options, all
-  brand tokens.
+- **Two tiers. Default to the simple one for anything marketers will edit,
+  and name the tier in the kickoff message.** The operator judged the full
+  tier "too complex for non-technical people" and asked for something fresh
+  and simpler (2026-10-24).
+  - **Simple (default):** General with a named **Layout** option first
+    ("Text with image beside it", not `split`); **Style** = background as a
+    colour *role* (cream / sand / purple / orange / navy / image; text colour
+    is derived from it, so no colour pickers and nothing unreadable),
+    space above / below, width, alignment, headline size and style;
+    **Visibility** = hide on mobile / desktop, show from / until, anchor.
+    Fields that only matter in one case are hidden with `conditional_settings`
+    (`validated_object` + `equals` / `not_equals`), e.g. the background image
+    only appears when Background = Image. Every block also gets a display
+    name, description, icon and colour, plus a block-picker preview image
+    captured from the component library page.
+  - **Full (on request, or for a technical audience):** General, **Style**
+    (background colour/custom/image/video with overlay, text colour, inner
+    and **outer spacing**, alignment, width, shape, title size), **Mobile**
+    (hide, spacing, alignment, title size; mobile-only, never changes
+    desktop), **Planning** (visible from / until). All brand tokens.
 - One shared wrapper renders the Style/Mobile tabs; one shared composable
   renders Planning: hidden on the live site outside its window, always visible
   with a dated badge in the Visual Editor, `?preview_date=` to simulate "now".
