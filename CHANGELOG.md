@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-24 — improve: custom-storyblok-demo retrospective: a "First five minutes" block (invoke the skill, MCP inspection, set the space domain to the predicted Vercel URL before the editor is opened, warn about the editor's remembered location, browser-pane login); an MCP-gaps table as the only reasons to use the Management API; a mandatory hand-over block; the independent visual reviewer and a component library page as standard close-out steps; pages accept nested blocks and atoms by default.
 - 2026-10-23 — improve: custom-storyblok-demo: `page.liquid is missing` can also be the editor's remembered preview location (not a settings revert); check via MCP, then switch the location dropdown.
 - 2026-10-23 — improve: CLAUDE.md "Connected tools first": use a connector for every read/write it covers, troubleshooting included; raw API only for gaps, stated.
 - 2026-10-23 — improve: custom-storyblok-demo is now MCP-first for CMS work
@@ -17,7 +18,7 @@ that is safe to share with colleagues. Update it alongside any `improve:` commit
 - 2026-10-08 — improve: fullscreen demo sections now keep square viewport
   edges, count fixed-header offsets only once in nested sticky layouts, and
   include a short-desktop CTA-clipping gate around 1024×500.
-- 2026-10-06 — improve: custom-storyblok-demo gets a kickoff checklist from the Pennylane retrospective (ask operator-owned decisions in one message, dual-axis locale router from day one, start from the reuse registry, contract on the first schema push, verification mechanics); reuse registry +5 candidates (hero, media/rich text, locale router, landing-page template, announcement bar).
+- 2026-10-06 — improve: custom-storyblok-demo gets a kickoff checklist from a same-day custom build retrospective (ask operator-owned decisions in one message, dual-axis locale router from day one, start from the reuse registry, contract on the first schema push, verification mechanics); reuse registry +5 candidates (hero, media/rich text, locale router, landing-page template, announcement bar).
 - 2026-10-06 — improve: custom-storyblok-demo covers market folders + field-level translation together (VE previews `<lang>/<full_slug>`; router and links must handle it).
 - 2026-10-06 — improve: custom-storyblok-demo component contract adds rich-text body copy, image-or-video media fields, default presets per block, a theme × block contrast matrix check, and the Tailwind 4 layer gotcha.
 - 2026-10-06 — improve: custom-storyblok-demo re-reads space settings after the preview-URL PUT and at close-out (a demo space silently reverted domain/environments/languages → `page.liquid is missing` again); no pre-made translations or pre-built live-beat pages.

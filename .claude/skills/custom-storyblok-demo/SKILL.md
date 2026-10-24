@@ -55,6 +55,31 @@ vars via CLI, wire both preview URLs into the CMS.
 > tracked skill. This file stays a generic process; memory supplies the
 > specifics at run time.
 
+## First five minutes — before anything else
+
+Two failures repeat across builds and both happen in the first minutes, so this
+block runs before the kickoff checklist, in this order:
+
+1. **Invoke this skill through the Skill tool**, visibly. Reading the SKILL.md
+   and following it silently is what the operator called "you didn't use the
+   skills" (2026-10-23).
+2. **Inspect the space with the Storyblok MCP** (`getSpace`, `listStories`,
+   `listManagementComponents`), not curl. See "MCP gaps" below for the few
+   things that need the Management API.
+3. **Point the editor at the frontend NOW, not at step 9.** Pick the Vercel
+   project name at once (`<customer>-storyblok-demo`, URL
+   `https://<customer>-storyblok-demo.vercel.app/`) and PUT the space `domain`
+   + environments to that predicted URL immediately, before any code exists.
+   A 404 there is harmless; the Shopify stub is not. Five builds hit
+   `page.liquid is missing` (2026-09 to 2026-10-23) because the domain was set
+   hours in, after the operator had already opened the Visual Editor on the
+   stub and the editor had remembered that location.
+4. **Tell the operator, in the kickoff message:** "If you already opened the
+   Visual Editor, pick 'Vercel' in its location dropdown (next to the
+   desktop/mobile icons) and hard-refresh." And ask them to log in **inside
+   the browser pane** (it has its own session, separate from their browser),
+   so the editor can actually be checked (guardrail 12).
+
 ## Kickoff checklist — one message, then build
 
 A full same-day build (2026-10-06) was fast but still lost its time in the
@@ -373,7 +398,8 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
    on the first run). Avoid screenshots unless a text check is ambiguous; a
    first "blank" check is usually a paint-timing race — re-check text.
 
-9. **Wire the space `domain` AND both preview environments** via Management
+9. **Re-assert the space `domain` AND both preview environments** (first set
+   in "First five minutes", step 3) via Management
    API (the MCP has no space-settings write op). Solutions Demo spaces ship
    with `domain` = `https://<hash>.me.storyblok.com/` — that host is a
    Shopify theme stub and the Visual Editor iframe shows
@@ -476,6 +502,10 @@ them without being asked and say in the plan that they are applied.
   `top: 0`, not the header height again. Include a short-desktop gate around
   1024×500 and measure that the full copy and CTA remain inside the viewport;
   a standard laptop screenshot does not catch this class of clipping.
+- **Pages accept nested blocks and atoms too**, not only sections (operator
+  preference, 2026-10-23): the flexible page's body whitelists the sections,
+  items and atoms groups, items render in a page-level frame, and site-config
+  items live in their own group so they never show in a page's picker.
 - Equal-size cards by default; "featured" layouts only when there are more
   items than columns.
 - Schema scripts are the single source of truth. Never patch a schema by hand
@@ -531,6 +561,19 @@ them without being asked and say in the plan that they are applied.
   publishing, and say so — never overwrite or publish their draft.
 
 **Close-out**
+- **Hand-over block (always in the final message):** live URLs; "In the
+  Visual Editor, the location dropdown must show 'Vercel' (pick it and
+  hard-refresh if you see `page.liquid is missing`)"; what was verified on
+  which surface; what was NOT verified (say "Visual Editor not checked by me"
+  if the pane was never logged in); live beats left for the operator.
+- **Independent visual reviewer before hand-over.** A subagent that did not
+  build anything compares each home to the live site at 1440 and 375 and
+  scores it; fix its high/medium items in one batch and re-measure. On the
+  2026-10-23 build it caught the mobile and header gaps (6/10 → fixed).
+- **Component library page** per site (and one in the group/master folder):
+  every block with its main variants under numbered dividers, `noindex`. The
+  operator uses it to see the whole kit quickly; build it once, duplicate it
+  with the MCP's `duplicateStory`.
 - Re-read the space settings (`GET /v1/spaces/<id>`) as the last step before
   handing over: `domain` and the first environment must be the Vercel URL,
   and the languages must be the locked set. Never report "preview wired"
@@ -543,6 +586,20 @@ them without being asked and say in the plan that they are applied.
   never a PR or merge on the SE team repo.
 
 ## Working with the Storyblok Management API / MCP
+
+**MCP gaps (checked 2026-10-23): the only reasons to use the Management API.**
+Everything else (stories, folders, publish, duplicate, workflows and stage
+changes, assets, components read) goes through the MCP.
+
+| Need | MCP | Use |
+|---|---|---|
+| Space settings write (`domain`, environments, languages, `use_translated_stories`) | read only (`getSpace`) | MAPI `PUT /spaces/<id>` |
+| Space API keys (Preview token) | none | MAPI `GET /spaces/<id>/api_keys` |
+| Space roles | none | MAPI `/space_roles` (script) |
+| Experiments: create, activate, results | none | MAPI `/experiments` (script); results accept `bar`, `line`, `text` only |
+| Bulk component schemas + presets | per-call only | idempotent schema script (single source of truth) |
+
+Say in one line which row applies when you use the Management API.
 
 Mechanics learned the hard way — none of these are obvious from the tool
 descriptions.
@@ -624,8 +681,8 @@ descriptions.
 - **No localhost run/verify** — the deployed URL is the single render gate.
 - **Cheap verification only**: `get_page_text`/`innerText`, never
   `read_network_requests` (base64 fonts) and rarely a screenshot.
-- **Don't churn MCP `search`** for space-settings writes — they aren't in the
-  connector; go straight to Management API curl for token + environments.
+- **Don't churn MCP `search`** for the rows in the MCP-gaps table; go straight
+  to the Management API for exactly those, and use the MCP for everything else.
 
 ## Visual fidelity on high design-language-gap sites
 
