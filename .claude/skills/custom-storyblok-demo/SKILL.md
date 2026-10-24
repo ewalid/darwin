@@ -485,7 +485,10 @@ them without being asked and say in the plan that they are applied.
     (`validated_object` + `equals` / `not_equals`), e.g. the background image
     only appears when Background = Image. Every block also gets a display
     name, description, icon and colour, plus a block-picker preview image
-    captured from the component library page.
+    captured from the component library page. Set that image on the block's
+    **preset** (`image`) as well as the component: the picker's hover preview
+    shows the preset image, so a component-only image never appears
+    (verified in the editor, 2026-10-24).
   - **Full (on request, or for a technical audience):** General, **Style**
     (background colour/custom/image/video with overlay, text colour, inner
     and **outer spacing**, alignment, width, shape, title size), **Mobile**
