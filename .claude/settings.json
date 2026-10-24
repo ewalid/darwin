@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -nc --arg c \"Darwin reminder: (1) If a Darwin skill matches this request, invoke it with the Skill tool and say so before acting. Do not read its SKILL.md as a substitute. (2) Use connected tools first (Storyblok MCP, Notion, Slack, Gong, browser). Use raw APIs or curl only for gaps the skill documents, and name the gap when you do.\" '{hookSpecificOutput:{hookEventName:\"UserPromptSubmit\",additionalContext:$c}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
