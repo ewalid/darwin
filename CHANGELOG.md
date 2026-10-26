@@ -6,9 +6,11 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-26 — improve: custom-storyblok-demo hard-bans stuffing prospect copy into showcase blocks when design gap is HIGH — build matching Vue or run replicate-section (Succession home correction).
 - 2026-10-26 — improve: storyblok-content: experiment Results panels are plain text (markdown shows literally), funnels chart counts from the first meaningful step, reload the app after re-pushing; custom-storyblok-demo: crop YouTube background embeds (cover sizing, ~1.3× oversize, screenshot after ~9s) and accept a link or bare ID.
 - 2026-10-24 — improve: custom-storyblok-demo: block-picker thumbnails go on the preset too (the picker's hover preview shows the preset image).
 - 2026-10-24 — improve: custom-storyblok-demo: two-tier component contract, defaulting to a simple tier for marketer-facing demos (background as a colour role with derived text colour, named layouts, conditional fields, picker preview images); assert every scripted edit matched, because lint reformatting makes string replacements silently no-op.
+- 2026-10-24 — process-customer on a new UK demo account: local-only brief written, new Notion Accounts row created, missing AE select option added to the Accounts DB.
 - 2026-10-24 — improve: `.claude/settings.json` UserPromptSubmit hook injects a per-prompt reminder: invoke the matching Darwin skill via the Skill tool, use connected tools first (raw API only for named gaps).
 - 2026-10-24 — improve: custom-storyblok-demo retrospective: a "First five minutes" block (invoke the skill, MCP inspection, set the space domain to the predicted Vercel URL before the editor is opened, warn about the editor's remembered location, browser-pane login); an MCP-gaps table as the only reasons to use the Management API; a mandatory hand-over block; the independent visual reviewer and a component library page as standard close-out steps; pages accept nested blocks and atoms by default.
 - 2026-10-23 — improve: custom-storyblok-demo: `page.liquid is missing` can also be the editor's remembered preview location (not a settings revert); check via MCP, then switch the location dropdown.

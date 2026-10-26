@@ -740,6 +740,15 @@ Prefer the team `replicate-site` / `replicate-section` quality gate
 (screenshot → reviewer) when the operator invoked it. Freehand restyles
 still owe the delta table.
 
+**Hard ban — content-swap is not fidelity.** When design-language gap is
+HIGH (or the operator asked for the live site look), do **not** ship a
+"real" marketing surface by pasting prospect copy into the starter
+showcase blocks (`hero-section`, `image-text-section`, sparkle frames,
+Brand New Day layouts). That fails the structure compare even if the
+words match. Build `sw-*` (or equivalent) Vue that mirrors the source
+layout, or run `/replicate-section` section-by-section. Operator
+correction 2026-10-26 (Succession home).
+
 **Assets:** lock **one** delivery path at kickoff (prefer the CMS asset
 library / Storyblok CDN for demos). Do not mid-flight hop through a
 third-party image host and back — each hop forces re-wire, re-publish,
