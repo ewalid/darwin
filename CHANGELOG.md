@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-26 — improve: storyblok-content: experiment Results panels are plain text (markdown shows literally), funnels chart counts from the first meaningful step, reload the app after re-pushing; custom-storyblok-demo: crop YouTube background embeds (cover sizing, ~1.3× oversize, screenshot after ~9s) and accept a link or bare ID.
 - 2026-10-24 — improve: custom-storyblok-demo: block-picker thumbnails go on the preset too (the picker's hover preview shows the preset image).
 - 2026-10-24 — improve: custom-storyblok-demo: two-tier component contract, defaulting to a simple tier for marketer-facing demos (background as a colour role with derived text colour, named layouts, conditional fields, picker preview images); assert every scripted edit matched, because lint reformatting makes string replacements silently no-op.
 - 2026-10-24 — improve: `.claude/settings.json` UserPromptSubmit hook injects a per-prompt reminder: invoke the matching Darwin skill via the Skill tool, use connected tools first (raw API only for named gaps).

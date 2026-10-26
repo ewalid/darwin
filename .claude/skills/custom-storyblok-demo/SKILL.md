@@ -333,6 +333,14 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
         `<component :is="'NuxtLink'">` renders a dead `<nuxtlink>` tag with no
         `href`. Use `resolveComponent('NuxtLink')` (or real `<NuxtLink>` /
         `<div>` branches). Same for any component name passed to `:is`.
+      - **YouTube behind content needs cropping.** Even with `controls=0`, an
+        autoplaying embed shows its title bar, play/skip buttons and logo for
+        the first seconds. Size the iframe to cover its box (container
+        query units: `max(100cqw, 177.78cqh)` × `max(100cqh, 56.25cqw)`),
+        then oversize it ~1.3× inside an `overflow: hidden` box, add
+        `pointer-events: none`, and judge it on a screenshot taken ~9s after
+        load, not 2s. Accept a link or a bare ID (parse `watch?v=`,
+        `youtu.be/`, `/embed/`, `/shorts/`).
       After any such change, verify on the DEPLOYED page that the rendered
       `object-position` / height / `href` actually reflect the intent — a
       successful build is not proof (guardrail 12).

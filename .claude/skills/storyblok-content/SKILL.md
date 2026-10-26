@@ -257,6 +257,14 @@ fails at exactly the moment someone tries.
   lines. Normalize cumulative metrics when traffic weights differ, keep the
   fake-data warning inside the first and last panels, and never select a
   winner from simulated evidence.
+- **Results panels: plain text, honest scales, reload to see them.** Text
+  panels render markdown literally (`**bold**` shows its asterisks), so write
+  plain sentences. A funnel bar chart that starts at a 100% "visited" step
+  flattens every later step to an invisible sliver: chart counts from the
+  first meaningful step instead. After re-pushing charts the editor keeps
+  showing the previous version (same "last updated" stamp) even though the
+  API returns the new one: reload the app before judging the change
+  (2026-10-26, all three self-caught on one push).
 - **Decide draft-versus-published deliberately, then verify the state.**
   Publishing is right when a live URL is the deliverable; staying draft
   is right when the point is to show an editorial workflow. Either way
