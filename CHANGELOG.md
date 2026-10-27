@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-27 — improve: storyblok-content: Ideation Room bodies written through the API don't show in the Writing Room; set name, links and status by API, write the body in the editor.
 - 2026-10-27 — improve: custom-storyblok-demo: space languages and use_translated_stories must be PUT top-level (inside `options` they are silently ignored); a market folder named like a space language code is read as a language prefix, so remove the code or rename the folder first.
 - 2026-10-26 — improve: custom-storyblok-demo hard-bans stuffing prospect copy into showcase blocks when design gap is HIGH — build matching Vue or run replicate-section (Succession home correction).
 - 2026-10-26 — improve: storyblok-content: experiment Results panels are plain text (markdown shows literally), funnels chart counts from the first meaningful step, reload the app after re-pushing; custom-storyblok-demo: crop YouTube background embeds (cover sizing, ~1.3× oversize, screenshot after ~9s) and accept a link or bare ID.

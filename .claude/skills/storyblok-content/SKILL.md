@@ -257,6 +257,15 @@ fails at exactly the moment someone tries.
   lines. Normalize cumulative metrics when traffic weights differ, keep the
   fake-data warning inside the first and last panels, and never select a
   winner from simulated evidence.
+- **Ideation Room: the API sets the idea, the editor writes its body.**
+  `POST /ideas` with `content: {"default": <doc>}` stores the body (a GET
+  returns it), but the Writing Room opens with an empty body. Typing there
+  autosaves over the API content, in the same shape, so the problem is not
+  the format. Use the API for the name, `story_ids` links and status. Write
+  the body in the editor: type or paste it (`## ` and `- ` become headings
+  and lists), then reload to confirm it persisted. An earlier script comment
+  claimed `{"default": doc}` fixed the empty body. Nobody had checked it in
+  the editor (2026-10-27).
 - **Results panels: plain text, honest scales, reload to see them.** Text
   panels render markdown literally (`**bold**` shows its asterisks), so write
   plain sentences. A funnel bar chart that starts at a 100% "visited" step
