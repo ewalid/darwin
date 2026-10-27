@@ -700,6 +700,17 @@ descriptions.
   live AI-translation beat.
 - **Asset filenames are lowercased** on upload — look assets up
   case-insensitively.
+- **Space languages: send them top-level, then re-read.** `PUT /spaces/<id>`
+  with `{"space":{"options":{"languages":[...],"use_translated_stories":false}}}`
+  returns 200 and changes nothing. The working shapes are
+  `{"space":{"languages":[{"code":"de","name":"German"}]}}` and
+  `{"space":{"use_translated_stories":false}}`. Check `options.languages`
+  in the response, not the status code (2026-10-27).
+- **A market folder named like a language code is read as a language.** The
+  starter's `getLanguage` treats the first URL segment as a language when it
+  matches a space language code, so `es/home` becomes "home in Spanish" and
+  404s. Before building market folders (`fr/`, `es/`, `de/`), remove those
+  codes from the space languages, or name the folders differently.
 - **Space-setting changes and the CDN cache.** After changing a space setting
   (languages, translated stories), cached 404s keep being served until the
   cache version bumps — republish any clean story to force it.
