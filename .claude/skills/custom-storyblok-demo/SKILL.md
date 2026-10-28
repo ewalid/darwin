@@ -558,6 +558,17 @@ them without being asked and say in the plan that they are applied.
   `display` (a button) silently overrides `hidden` / `md:inline-flex`.
   Put component classes in `@layer components`, and check the page
   width equals the viewport at 375px.
+- **Global resets go in at zero specificity.** A layout-wide reset such as
+  `.site a { color: inherit }` (0,1,1) out-ranks every single-class
+  component colour, so link-based buttons and tiles silently lose their
+  text colour (dark text on a brand-colour button, 2.94 contrast, found
+  only by the contrast matrix, 2026-10-28). Write resets as
+  `.site :where(a)`.
+- **No opacity-based scroll reveals.** An `animation-timeline: view()`
+  fade that starts at `opacity: 0` leaves everything below the fold
+  blank in full-page captures and in any frame that never scrolls (the
+  editor iframe, thumbnails). Premium polish = hover states, shadows,
+  spacing, never content that starts hidden.
 - **Fullscreen sections are not cards.** Keep their viewport edges square.
   In nested sticky layouts, apply the fixed-header offset exactly once: if
   the parent panel already sticks below the header, its sticky child uses
@@ -649,6 +660,15 @@ them without being asked and say in the plan that they are applied.
 - Run a schema-vs-content validator before calling content done (undeclared
   fields, `max_length`, required, bloks whitelists, publish state) — a script
   for this lives in the latest demo's build folder (path in local memory).
+  Re-run it after every content write, not once at the end: it is what
+  catches a block placed in a locked template's list that the template's
+  own whitelist forbids (renders fine, cannot be added in the editor).
+- Run the URL matrix with **one page of every content type**, articles
+  included, after the content exists. Page-level code that walks
+  `story.content` must check `Array.isArray`: the same field name is a
+  block list on one root type and rich text on another (`body`), and a
+  spread over the rich-text doc took down every article page with a 500
+  (2026-10-28).
 - Finish every custom build by running **`component-reuse`**: log what this
   build created that recurs across demos, and update the plans. Plan only;
   never a PR or merge on the SE team repo.
@@ -702,6 +722,11 @@ descriptions.
   copy is current. Differ → someone edited in the editor, so re-fetch the
   whole thing and merge. This caught a real conflict twice in one session
   (an operator edit, and products added via the picker).
+- **Content through the MCP means full-story rewrites.** `updateStory` has
+  no partial patch, so every later fix resends the whole page. Run the
+  independent visual review and the validator on the FIRST content pass,
+  then batch all fixes for a story into one write; don't trickle small
+  edits (an SEO title, one block) into separate rewrites.
 - **Content written by API bypasses editor-side validation.** Component
   whitelists and required fields aren't enforced, so a page can render
   perfectly while being un-addable or un-editable in the UI. After authoring,
