@@ -362,6 +362,26 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       pattern they already liked beats a fresh invention
       (`~/dev/accounts/*/` and prior demo repos).
 
+   e. **Components someone else built (another agent, a parallel session,
+      a Cursor build) — audit field by field before the dry-run.** Inherited
+      work looks finished in the CMS and can be dead on the page. One demo
+      morning (2026-10-27) found a form whose `width` field the renderer never
+      read, an invisible submit button, a `required` Choices field that made
+      every text field unsaveable, and page templates that rendered blank when
+      empty. Three checks:
+      - **Every schema field is read by its renderer.** Grep each field name
+        of the component's schema in its Vue file; a field nobody reads is a
+        control that silently does nothing. (The schema-vs-content validator
+        only checks the other direction.)
+      - **Theme tokens never resolve to `undefined`.** If the layout copies
+        CMS colours into CSS variables, each one falls back to the default
+        when the CMS value is empty (`?.color || defaults[key]`), or every
+        section on that colour turns transparent. Check with
+        `getComputedStyle(document.documentElement).getPropertyValue('--x')`.
+        Fix it once in the layout, never per component.
+      - **Change each field and watch the page change**, per block, on the
+        real surface (audit d, applied to code you didn't write).
+
    Commit and push the fixes.
 
 5. **`npm install`, then check `git diff` before committing.** Benign lockfile
@@ -517,6 +537,14 @@ them without being asked and say in the plan that they are applied.
 - **Media fields take image or video** (`filetypes: images, videos`), rendered
   by one shared component. Vue sets `muted` as a property, so autoplay needs
   `el.muted = true` and an explicit `play()` on mount and on asset change.
+- **Fields that only apply to some variants are never `required`.** Hide
+  them with `conditional_settings` instead: a required field is enforced on
+  API writes even when hidden, so a Choices field required on every form
+  field blocked saving plain text fields (2026-10-27).
+- **Every page template renders a visible empty state** for missing media,
+  bio or video ("Add a video in Storyblok", a silhouette with "Photo coming
+  soon"), never a blank area. A page created from a preset must look like it
+  is waiting for content, not broken.
 - **Every block ships a default preset.** A block added in the editor
   arrives empty (only `component` + `_uid`); a default preset makes it
   arrive with placeholder copy and a brand image. Re-check `preset_id`
@@ -590,6 +618,12 @@ them without being asked and say in the plan that they are applied.
 - Ask at kickoff (with the other human-gated asks) for the operator to log the
   browser pane into the CMS, so the Visual Editor can actually be checked
   (guardrail 12). Two builds shipped with "not verified in the editor".
+- **Blocking:** that login ask goes in the kickoff message, every build,
+  not "when needed". A third build (2026-10-27) shipped schema tabs, presets
+  and the A11y tab unchecked in the editor because the ask was never made.
+- If the browser pane refuses the deploy domain (it refuses `*.vercel.app`),
+  verify the live site in Claude in Chrome. Never report localhost as the
+  live check.
 - Before any write, check `unpublished_changes`. If the operator has a draft in
   progress, patch only the target block inside that draft, save without
   publishing, and say so — never overwrite or publish their draft.
@@ -698,6 +732,11 @@ descriptions.
   publishing (move it with `createWorkflowStageChange` first). The MCP's
   `updateStory` also takes `ai_translate_language`, a backup path for a
   live AI-translation beat.
+- **Schema before content, and stop on failure.** A schema script writes
+  and re-fetches the schema first, and exits if any schema write failed,
+  before it writes stories. One run wrote a story after its schema update
+  returned 422 and left a half-written, unpublished draft behind
+  (2026-10-27).
 - **Asset filenames are lowercased** on upload — look assets up
   case-insensitively.
 - **Space languages: send them top-level, then re-read.** `PUT /spaces/<id>`

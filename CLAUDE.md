@@ -212,6 +212,22 @@ skill-by-skill.)
     committing it. (2026-09-29: a parallel session's new component was
     swept into an unrelated commit and deployed.)
 
+14. **Darwin always works on an up-to-date `main`.** At session start
+    and again before every commit: be on `main`, `git fetch`, then
+    `git pull --rebase origin main`. Push `improve:` commits at the
+    end of the task rather than leaving them local, so other machines
+    and sessions start from the same Darwin. If the pull conflicts, or
+    the tree holds uncommitted changes I didn't make, stop and ask.
+    (Operator rule, 2026-10-28.)
+
+15. **Second occurrence → fix the root.** When the same root cause
+    shows up a second time, fix it at the source in that pass instead
+    of patching another instance. If timing truly forbids it (mid-demo),
+    say so and make it the first thing done afterwards. (2026-10-27: a
+    theme-token bug that left brand colours as `undefined` was patched
+    in five separate components across two days; the root fix was three
+    lines in the layout.)
+
 ## Priority logic (for briefings and triage)
 
 1. A demo today — always first.
