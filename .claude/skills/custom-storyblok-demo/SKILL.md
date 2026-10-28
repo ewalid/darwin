@@ -150,7 +150,9 @@ hero rebuilt instead of reused. Do these up front:
    - **Assert every scripted edit matched.** The starter's `eslint --fix`
      reformats CSS and Vue files, one-line rules included, so a later
      `str.replace` against the text you originally wrote silently does
-     nothing. Check the match count (`assert s.count(old) == 1`, or `re.subn`
+     nothing. Files a script GENERATES into the repo (catalogue JSON, manifests)
+     must be written in the lint format (indent 2, trailing newline), or
+     every re-run breaks the commit hook (hit twice in one build). Check the match count (`assert s.count(old) == 1`, or `re.subn`
      and check `n`), or use the Edit tool, which fails loudly. In regex
      replacement strings, never escape `.`: `"\\.bt-wrap {"` writes a
      literal backslash into the selector. (2026-10-24: three edits no-op'd
@@ -300,7 +302,11 @@ while Darwin works — by the time the token is needed (step 6), it's ready.
       or fetching `<folder>/<story>` from the root, resolves to the wrong
       place — or nothing — once content lives under `<brand>/...`. Resolve
       the folder from the current route instead, in one shared composable
-      that every call site uses.
+      that every call site uses. That includes the brand's own site-config: resolve it
+      from the **story path**, not the URL folder. At a brand root
+      (`/brand` → story `brand/home`) the URL has no folder at all, so a
+      URL-based walk falls back to the default brand and the second brand
+      renders in the first brand's header and theme (2026-10-28).
 
       **Same trap on the locale axis, and it is the expensive one.** A
       folder-per-locale (Dimensions) site whose frontend hardcodes the
@@ -563,7 +569,10 @@ them without being asked and say in the plan that they are applied.
   component colour, so link-based buttons and tiles silently lose their
   text colour (dark text on a brand-colour button, 2.94 contrast, found
   only by the contrast matrix, 2026-10-28). Write resets as
-  `.site :where(a)`.
+  `.site :where(a)`. The same trap hits spacing: `.rich p { margin: 0 }` (0,1,1)
+  beat `.rich > * + *` (0,1,0) and flattened every paragraph in every
+  rich-text block of a two-brand library (2026-10-28, second occurrence
+  the same day: fix resets at the source, not per component).
 - **No opacity-based scroll reveals.** An `animation-timeline: view()`
   fade that starts at `opacity: 0` leaves everything below the fold
   blank in full-page captures and in any frame that never scrolls (the
@@ -710,6 +719,11 @@ descriptions.
   delay (~0.35s) plus retry-with-backoff on 429. Write the loop to be
   **idempotent and resumable** — check what already exists first — so a
   mid-run 429 can simply be re-run rather than creating duplicates.
+- **`/components/` ignores paging.** It returns every component on every
+  page, so a generic "fetch until a page has < 100 items" helper loops
+  forever once a space passes 100 components (schema push and validator
+  both hung silently, 2026-10-28). Stop paging when a page brings no new
+  ids.
 - **Some move operations report failure but succeed.** `moveStory` /
   `bulkMoveStories` have returned an error ("Body is unusable: Body has
   already been read") while the move actually completed server-side. Don't
