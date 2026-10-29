@@ -552,6 +552,19 @@ them without being asked and say in the plan that they are applied.
   bio or video ("Add a video in Storyblok", a silhouette with "Photo coming
   soon"), never a blank area. A page created from a preset must look like it
   is waiting for content, not broken.
+- **Editors never type an identifier.** Any field whose value must match
+  something in another system (a collection handle, SKU, facet attribute,
+  category, store, slug) is an `option`/`options` field fed by a datasource
+  that a build script syncs FROM that system, labelled for humans
+  ("Swift · Roller blinds (48)"), with empty = a stated default. A text field
+  with "e.g. roller" in the help text is a defect (operator, 2026-10-29: "no
+  one is going to know values by heart"). Free text is only for real content
+  (copy, discount codes the marketer invents).
+- **`conditional_settings` on a boolean did not work** (2026-10-29: a
+  `not_equals true` rule left the dependent field visible). Drive
+  conditionals from an `option` field, or show the field with help text
+  saying when it applies; never ship a conditional you have not watched
+  hide and show in the editor.
 - **Every block ships presets, and none is the default.** Presets (real copy
   and brand imagery) are offered in the block picker, but adding a block
   gives a BLANK one, so editors can always start from scratch: leave the

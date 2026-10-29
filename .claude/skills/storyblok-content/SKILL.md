@@ -328,6 +328,10 @@ fails at exactly the moment someone tries.
   onto the new field instead. Diff discipline on schema edits is not
   optional: a schema update should read as "N new fields added," never
   as changes to lines that were already there.
+- **No field asks editors to type an identifier** (handle, SKU, slug,
+  attribute key): use a datasource-backed `option` synced from the source
+  system. Full rule and the boolean-conditional caveat:
+  `custom-storyblok-demo` → component contract.
 - **Never overwrite or publish the operator's draft.** Before a write,
   read `unpublished_changes`. If the operator has edits in progress, apply
   only the targeted change inside the current draft content, save without
