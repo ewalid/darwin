@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-10-29 — improve: presets are never named "default"/"par défaut" (custom-storyblok-demo); CLAUDE.md rule 14: pull again before relying on a skill read earlier in a long session.
 - 2026-10-29 — improve: custom-storyblok-demo + storyblok-content: editors never type identifiers (collection, SKU, slug…) — datasource-backed dropdowns synced from the source system; conditional fields driven by a boolean didn't hide in the editor, so drive them from an option field or verify them live.
 - 2026-10-29 — improve: custom-storyblok-demo: presets are offered in the block picker but never set as a block's default; adding a block gives a blank one (operator rule), so blank adds must render and be tested.
 - 2026-10-28 — improve: custom-storyblok-demo: resolve a brand's site-config from the story path (a brand root has no URL folder, so the second brand got the first brand's chrome); `/components/` ignores paging, so stop paging when a page brings no new ids (a generic helper looped forever past 100 components); reset-specificity rule extended to spacing resets; generated repo files must be written in the lint format.

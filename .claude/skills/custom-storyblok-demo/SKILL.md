@@ -574,6 +574,12 @@ them without being asked and say in the plan that they are applied.
   the preset. (Operator rule, 2026-10-29: "I want to select presets but also
   have the possibility to create from scratch." Earlier builds set a default
   preset on every block.)
+  Never NAME a preset "default" / "par défaut" either: a preset called
+  "Brand (par défaut)" reads as a default in the picker even with
+  `preset_id` empty, and drew the same correction again (2026-10-29). Name
+  it "Modèle <brand>" or after its variant ("Accueil : tuiles produits").
+  Check with the MCP that every component's `preset_id` is null, starter
+  blocks included.
 - **Theme tokens are colour roles, not fixed colours.** Before calling a
   themed library done, render every block × every theme on a throwaway draft
   page and measure text contrast against its real background (AA: 4.5, or

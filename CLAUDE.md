@@ -218,7 +218,10 @@ skill-by-skill.)
     end of the task rather than leaving them local, so other machines
     and sessions start from the same Darwin. If the pull conflicts, or
     the tree holds uncommitted changes I didn't make, stop and ask.
-    (Operator rule, 2026-10-28.)
+    (Operator rule, 2026-10-28.) Pull again before relying on a skill or
+    rule I read earlier in a long session: other sessions push skill fixes
+    mid-day (2026-10-29: a build followed a stale copy of a demo skill and
+    shipped default presets the skill had just banned).
 
 15. **Second occurrence → fix the root.** When the same root cause
     shows up a second time, fix it at the source in that pass instead
