@@ -121,7 +121,8 @@ hero rebuilt instead of reused. Do these up front:
    announcement bar and build scripts. The operator names past demos as the
    reference ("like we did for X"); the registry says where X lives.
 4. **Apply the component contract on the FIRST schema push,** not after
-   feedback: rich-text body copy, image-or-video media, default presets,
+   feedback: rich-text body copy, image-or-video media, presets (never
+   set as the block's default),
    help text on every option, theme colour roles (see "Standing build
    defaults").
 5. **Verification mechanics:**
@@ -551,10 +552,15 @@ them without being asked and say in the plan that they are applied.
   bio or video ("Add a video in Storyblok", a silhouette with "Photo coming
   soon"), never a blank area. A page created from a preset must look like it
   is waiting for content, not broken.
-- **Every block ships a default preset.** A block added in the editor
-  arrives empty (only `component` + `_uid`); a default preset makes it
-  arrive with placeholder copy and a brand image. Re-check `preset_id`
-  after re-running the schema script.
+- **Every block ships presets, and none is the default.** Presets (real copy
+  and brand imagery) are offered in the block picker, but adding a block
+  gives a BLANK one, so editors can always start from scratch: leave the
+  component's `preset_id` empty, and make the schema script clear it on every
+  run. Consequence: every block must render sensibly with only `component` +
+  `_uid` (empty states, catalogue defaults), so test the blank add, not only
+  the preset. (Operator rule, 2026-10-29: "I want to select presets but also
+  have the possibility to create from scratch." Earlier builds set a default
+  preset on every block.)
 - **Theme tokens are colour roles, not fixed colours.** Before calling a
   themed library done, render every block × every theme on a throwaway draft
   page and measure text contrast against its real background (AA: 4.5, or
