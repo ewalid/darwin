@@ -41,6 +41,13 @@ batched turn as the other human-gated questions:
 - **Frontend already cloned, more code work:** stay in that demo repo.
   Do not re-run this standup pipeline. Do not try to invent a renderer
   by writing CMS content.
+  **First, audit the existing blocks against the current component contract
+  below.** Rules added after a demo was built do not apply themselves: a demo
+  built in September still had plain-text, character-limited descriptions in
+  November, and the operator hit the limit in front of a workshop (2026-11-04).
+  Fix the gap across the whole block library in one pass (schema + renderer +
+  in-place content migration, drafts saved as drafts), not in the one block
+  the operator happened to open.
 
 The shape: **the human-gated bits go up front** (a starter template choice
 and, if that template needs a pre-seeded CMS space, its creation — Darwin
@@ -541,6 +548,11 @@ them without being asked and say in the plan that they are applied.
   Titles, labels and one-liners stay `text`. Render through one shared
   wrapper that also accepts a legacy plain string, and migrate existing
   content in place rather than re-seeding it (operator preference, 2026-10-06).
+  No `textarea` with a `max_length` for copy: the editor shows "Character
+  limit reached" mid-sentence. Every block with an intro next to a grid or
+  list also gets a **Largeur du texte / Text width** option (auto, 50 %,
+  66 %, 100 %) driven by one CSS variable from the shared wrapper
+  (operator correction 2026-11-04, on a retail demo built before this rule).
 - **Media fields take image or video** (`filetypes: images, videos`), rendered
   by one shared component. Vue sets `muted` as a property, so autoplay needs
   `el.muted = true` and an explicit `play()` on mount and on asset change.
