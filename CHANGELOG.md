@@ -6,6 +6,7 @@ Session-level narrative detail lives in `memory.md` (local-only, git-ignored);
 this file is the short, skimmable, **name-free** "what changed and when" record
 that is safe to share with colleagues. Update it alongside any `improve:` commit.
 
+- 2026-11-04 — improve: storyblok-content: check the space for a native feature (sidebar, editor panel) before modelling it with fields; the MCP has no taxonomy operations, so a native Taxonomies section went unnoticed. Added the native Taxonomies API shapes (term CRUD, block scope, `assign_taxonomies`, `with_taxonomy_terms`, client-side filtering) and how to capture an undocumented editor request.
 - 2026-11-04 — improve: custom-storyblok-demo: long copy never uses a character-limited textarea, and intro text gets a text-width option (auto/50/66/100 %); when extending an existing demo, audit its blocks against the current component contract first and fix gaps library-wide.
 - 2026-10-29 — improve: presets are never named "default"/"par défaut" (custom-storyblok-demo); CLAUDE.md rule 14: pull again before relying on a skill read earlier in a long session.
 - 2026-10-29 — improve: custom-storyblok-demo + storyblok-content: editors never type identifiers (collection, SKU, slug…) — datasource-backed dropdowns synced from the source system; conditional fields driven by a boolean didn't hide in the editor, so drive them from an option field or verify them live.

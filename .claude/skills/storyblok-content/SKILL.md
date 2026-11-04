@@ -294,6 +294,38 @@ fails at exactly the moment someone tries.
   example page. That is the guardrail story — schema enforce, not training.
 
 
+## Native features before modelling one
+
+When the ask names a Storyblok concept (taxonomy, tags, releases, ideas,
+workflows…), open the space's sidebar and an editor story first and check
+whether it exists natively. Do not infer "no such feature" from the MCP:
+the MCP `search` returned nothing for "taxonomy" while the space had a full
+native Taxonomies section. (2026-11-04: a datasource + option-field taxonomy
+was built, tagged and wired to a selector before the editor's own
+Taxonomies panel was noticed; the operator wanted the native one, and the
+field version had to be removed.)
+
+**Native Taxonomies — API shapes (Management API; none in the MCP, partly
+undocumented, verified 2026-11-04):**
+- Terms: `GET/POST /taxonomy_terms` with `{"taxonomy_term": {display_name,
+  name, description, parent_id}}`. A taxonomy is a term with
+  `parent_id: null`; terms are its children, sub-terms nest further.
+  `GET /taxonomy_terms/{id}` returns `children`. Rate limit 6 req/s: throttle.
+- Block scope: `GET /components/{id}/taxonomy_terms`. Linking was done in
+  the Block Library → block → Taxonomy tab (Scope, Taxonomy, Maximum allowed
+  terms); each "Add" saves immediately, no Save needed.
+- Assign to a story: `PUT /stories/{id}/assign_taxonomies` with
+  `{"story": {"taxonomy_term_ids": [...]}}`. It replaces the whole set.
+  `PUT /stories/{id}` with `taxonomy_terms`/`taxonomy_term_ids` is silently
+  ignored. Assigning does not mark the story as changed, but the published
+  CDN only returns terms after a re-publish.
+- Delivery: `with_taxonomy_terms=1` adds `story.taxonomy_terms` (each term
+  with `taxonomy` and `parent`). There is no filter by term, so a selector
+  filters client-side (fine at demo scale).
+- If a write shape is unknown, capture it from the editor: hook
+  `window.fetch`/`XMLHttpRequest` in the page and log non-GET calls. The
+  browser network tool did not show the editor's PUT.
+
 ## Guardrails
 
 - Never write to a Storyblok space without the dry-run → OK step,
