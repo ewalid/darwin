@@ -13,6 +13,25 @@ description: >
 
 # storyblok-content
 
+## Storyblok agent skills — load first
+
+Before any Storyblok operation in this skill, invoke
+`storyblok:storyblok-use-storyblok` (CLAUDE.md, "Storyblok agent skills
+first"), then the skill it routes to:
+
+| Work in this skill | Storyblok skill |
+|---|---|
+| Blocks, content types, fields, datasources | `storyblok-model-content` |
+| Frontend components that render blocks | `storyblok-build-frontend` |
+| Figma design → blocks + components | `storyblok-implement-figma` |
+| Custom field input, editor panel, integration | `storyblok-build-plugin` |
+| Bulk pull/push, schema-as-code, migrations, scaffolding | `storyblok-use-cli` |
+| Any Storyblok MCP call (operation names, payload shapes) | `storyblok-use-mcp` |
+
+This skill stays the workflow (gates, defaults, close-out). Where a Storyblok
+skill contradicts a rule here, this file's rule wins and the conflict is
+flagged to the operator.
+
 ## Scope — this is Darwin's one opt-in, product-specific skill
 
 Darwin ships company- and product-agnostic (CLAUDE.md "Identity"). This

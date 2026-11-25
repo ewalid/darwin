@@ -14,6 +14,18 @@ description: >
 
 # darwin-toolkit
 
+## Storyblok agent skills (plugin)
+
+On every new computer, check `claude plugin list` for `storyblok@storyblok`.
+The repo's `.claude/settings.json` declares the marketplace
+(`storyblok/agent-plugin`) and enables the plugin, so Claude Code offers the
+install when the repo is trusted; if it did not, run
+`claude plugin marketplace add https://github.com/storyblok/agent-plugin.git`
+then `claude plugin install storyblok@storyblok`. The plugin also registers
+its own Storyblok MCP server: authorize it via `/mcp`, or keep the already
+configured Storyblok MCP and disable the duplicate. Update with
+`claude plugin update storyblok@storyblok`.
+
 ## Purpose
 
 Make four optional capabilities reproducible on any computer running this

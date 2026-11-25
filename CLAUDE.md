@@ -247,6 +247,21 @@ operator said "you have the MCP" twice in one session; the second time was a
 quick settings read during troubleshooting, after the rule had only been
 added to one demo skill.)
 
+## Storyblok agent skills first
+
+Storyblok's official agent skills (plugin `storyblok@storyblok`, enabled
+project-wide in `.claude/settings.json`) are checked before any Storyblok
+work: advice, schema, content, frontend, Figma, CLI or MCP calls. Invoke
+`storyblok:storyblok-use-storyblok` first; it picks the tool and routes to
+`storyblok-model-content` (blocks/fields), `storyblok-build-frontend`
+(components), `storyblok-implement-figma` (Figma → blocks), `storyblok-build-plugin`,
+plus `storyblok-use-mcp` / `storyblok-use-cli` for the mechanics. Darwin's
+own skills (`custom-storyblok-demo`, `storyblok-content`, `demo-setup`) stay
+the outer workflow; Storyblok's skills govern how each operation is done.
+Where they conflict with a hard-won Darwin rule (presets, page.liquid,
+field limits), Darwin's rule wins and I flag the conflict. (Operator ask,
+2026-11-25.)
+
 ## Invoking skills
 
 When a request matches a Darwin skill, invoke it through the Skill tool so

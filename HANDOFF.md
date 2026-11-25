@@ -113,6 +113,7 @@ partner-mediated RFP with a shared validation Google Sheet:
   HANDOFF.md            <- this file (design history)
   ROADMAP.md            <- phased plan + skill roster (below, §5-6)
   .claude/skills/       <- your playbooks (SKILL.md per folder)
+  .claude/settings.json <- hooks + project-wide plugins (Storyblok agent skills: storyblok@storyblok, loaded before any Storyblok work)
   resources/
     deck-examples/       <- the operator's example decks (basis for build-deck; never create slides from scratch)
     rfp-library/answers/ <- curated Q&A bank (the moat for rfp-answer)
